@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="stylesheets/login.css">
+</head>
+
+<body>
+  <div id="header_container">
+    <%- include("../partials/header") %>
+  </div>
+  <div class="login">
+    <h1>Login</h1>
+
+    <% if (messages.error) { %>
+      <p class="error-message">
+        <%= messages.error %>
+      </p>
+      <% } %>
+
+        <form action="/login" method="POST">
+          <div class="mail">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="pass">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <input type="submit" value="Login">
+        </form>
+
+        <p>Don't have an account? <a href="/register">Register</a></p>
+  </div>
+
+
+  <div id="footer_container">
+    <%- include("../partials/footer") %>
+  </div>
+</body>
+
+</html>

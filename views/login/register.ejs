@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register</title>
+</head>
+
+<body style="background-color: #f4f6f6;">
+    <div id="header_container"></div>
+    <form method="post" action="/register">
+        <h1>Register</h1>
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="username" required><br>
+
+        <label for="username">Email</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="pass" required>
+
+        <input type="checkbox" id="checkbox" name="terms" required>
+        <label for="terms"> Accept our <b>terms and conditions*</b></label><br>
+
+        <input type="submit" value="register">
+    </form>
+    <a href="/login">Login</a>
+    <div id="footer_container"></div>
+
+
+</body>
+</html>

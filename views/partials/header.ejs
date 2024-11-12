@@ -1,0 +1,70 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+        font-family: 'Commissioner';
+    }
+
+    /* navbariin eronhii style */
+    nav {
+        background-color: #ffffff;
+        height: 80px;
+        width: 100%;
+    }
+
+    /* logo hesgiin style */
+    a.logo {
+        font-size: 32px;
+        line-height: 80px;
+        font-weight: 600;
+        padding: 0 100px;
+        color: #3b93a7;
+    }
+
+    nav ul {
+        float: right;
+    }
+
+    /* navbariig hundlun bolgoh */
+    nav li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 28px;
+    }
+
+    /* text hesgiin style */
+    nav a {
+        font-size: 24px;
+        font-weight: 500;
+        color: black;
+    }
+
+    /* cartnii hesgiin style */
+    nav ul li a.Cart {
+        background-color: #3b93a7;
+        padding: 10px 12px;
+        border-radius: 12px;
+    }
+
+    /* login hesgiin style */
+    nav ul li a.Login {
+        padding: 10px 40px;
+        border-radius: 15px;
+        color: #F4F6F6;
+        background-color: #3b93a7;
+    }
+</style>
+<nav>
+    <label ><a href="/" class="logo">Anka_Customs</a></label>
+    <ul>
+        <li><a href="/cars">Cars</a></li>
+        <li><a href="/accessories">Accessories</a></li>
+        <li><a class="Cart" href="/cart"><img src="Icons/Cart.svg" alt="Cart"></a></li>
+        <li><a class="Login" href="/login">Login</a></li>
+    </ul>
+</nav>

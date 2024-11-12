@@ -1,0 +1,50 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=viewport-width, initial-scale=1.0">
+  <title>Anka_Customs</title>
+  <link rel="stylesheet" href="/stylesheets/allFiles.css">
+</head>
+
+<body>
+  <%- include('sidebar') %>
+    <div class="filelist">
+      <% if (error) { %>
+        <div style="color: red; padding: 10px; background-color: #ffe5e5; border: 1px solid red;">
+          <%= error %>
+        </div>
+        <% } else { %>
+
+          <ul>
+            <% allFiles.forEach(file=> { %>
+              <li>
+                <h3>
+                  <%= file.title %>
+                </h3>
+                <p>Description: <%= file.description %>
+                </p>
+                <p>Print Time: <%= file.printTime %>
+                </p>
+                <p>Materials: <%= file.material %>
+                </p>
+                <p>Requires Glue: <%= file.glue ? 'Yes' : 'No' %>
+                </p>
+                <p>Pieces: <%= file.pieces %>
+                </p>
+                <p>Weight: <%= file.weight %>
+                </p>
+                <p><a href="<%= file.link %>">Instruction Manual</a></p>
+                <div class="images">
+                  <% file.coverImageNames.forEach(imageName=> { %>
+                    <img src="/uploads/ModelCovers/<%= imageName %>" alt="<%= file.title %>" class="file-image">
+                    <% }) %>
+                </div>
+              </li>
+              <% }) %>
+          </ul>
+          <% } %>
+    </div>
+</body>
+
+</html>

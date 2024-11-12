@@ -1,0 +1,83 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="/stylesheets/adminHome.css">
+    <style>
+        /* Basic reset and layout styles */
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <%- include('sidebar') %>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Top Panel with Metrics -->
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Total Income</h3>
+                    <h1>$23,124.42</h1>
+                </div>
+                <div class="metric">
+                    <h3>Total Sales</h3>
+                    <h1>504</h1>
+                </div>
+                <div class="metric">
+                    <h3>Total Clients</h3>
+                    <h1>1,194</h1>
+                </div>
+                <div class="metric">
+                    <h3>Best Selling Product</h3>
+                    <h1>Dakar Truck 1/10</h1>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="chart-container">
+                <h3>Income by month</h3>
+                <canvas id="incomeChart"></canvas>
+            </div>
+
+
+            <!-- Chart.js Library -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Sample data for the chart
+                const ctx = document.getElementById('incomeChart').getContext('2d');
+                const incomeChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                        datasets: [{
+                            label: 'Monthly Income',
+                            data: [50, 130, 100, 200, 250, 300, 280, 300, 350, 400, 450, 600],
+                            borderColor: '#3B93A7',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Income ($)'
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+</body>
