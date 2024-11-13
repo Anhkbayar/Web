@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
       type: String,
       required: [true, "Enter your password"],
     },
+    owned: {
+      type:[mongoose.Schema.Types.ObjectId]
+    },
+    
   })
   
   const users = mongoose.model("users", userSchema);

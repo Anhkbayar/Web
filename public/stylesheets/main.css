@@ -64,7 +64,10 @@
     font-size: 2em;
     font-weight: 600;
 }
-
+.cars-list ul{
+    display: flex;
+    gap: 20px;
+}
 .file-image {
     height: 100px;
 }

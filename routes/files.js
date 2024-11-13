@@ -32,12 +32,13 @@ router.get('/addFile', async (req, res) => {
 })
 // Route to add a new "file" entry
 router.post('/addFile', upload.array('photos', 4), async (req, res) => {
-    const { title, description, link, printTime, material, glue, pieces, weight } = req.body;
+    const { title, description,price, link, printTime, material, glue, pieces, weight } = req.body;
     const fileNames = req.files ? req.files.map(file => file.filename) : [];
     try {
         const newFile = await Filemodel.create({
             title,
             description,
+            price,
             link,
             printTime,
             material,
