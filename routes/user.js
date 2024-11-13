@@ -4,18 +4,13 @@ const userModel = require('../models/usermodel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-router.get('/', (req, res) => {
-    res.render('index.ejs');
-});
-
-
 
 router.get('/login', (req, res) => {
     res.render('login/login.ejs');
 });
 
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body; 
+    const { email, password } = req.body;
     try {
         const user = await userModel.findOne({ email });
         if (!user) {

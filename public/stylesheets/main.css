@@ -6,7 +6,65 @@
     font-family: 'Commissioner', sans-serif;
 }
 
-#bg {
+
+.top-wrapper {
+    position: relative;
     height: 610px;
     width: 100%;
+}
+
+.top-wrapper #bg {
+    height: 100%;
+    width: 100%;
+}
+
+.top-wrapper .shop {
+    position: absolute;
+    /* set button to an absolute position */
+    bottom: 10px;
+    /* adjust the top position of the button */
+    right: 80px;
+    /* adjust the left position of the button */
+    z-index: 2;
+    /* set a higher z-index than the image */
+    font-size: 2.5em;
+    font-weight: 600;
+    border-radius: 14px;
+    background-color: #3b93a7;
+    /* set your desired background color */
+    color: #fff;
+    /* set your desired text color */
+    border: none;
+    /* remove button border */
+    padding: 20px 35px;
+    /* set your desired padding */
+    cursor: pointer;
+    /* change mouse cursor on hover */
+}
+
+.top-wrapper .shop:hover {
+    background-color: #2f8295;
+}
+
+.cars-text {
+    margin: 10px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.cars-text h1 {
+    color: black;
+    font-size: 3em;
+}
+
+.cars-text a {
+    color: #3b93a7;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.file-image {
+    height: 100px;
 }

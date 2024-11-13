@@ -15,14 +15,41 @@
   <div class="top-wrapper">
     <img src="/Icons/background.png" alt="background" id="bg">
     <img src="/Icons/cars.png" alt="cars" id="cars">
-    <button type="button">Shop Now</button>
+    <form action="/cars">
+      <button type="submit" class="shop">Shop Now</button>
+    </form>
+
   </div>
   <div class="cars-text">
     <h1>Latest cars</h1>
     <a href="/cars">see all</a>
   </div>
   <div class="cars-list">
-
+    <ul>
+      <% allFiles.forEach(file=> { %>
+        <li>
+          <h3>
+            <%= file.title %>
+          </h3>
+          <p>Description: <%= file.description %>
+          </p>
+          <p>Print Time: <%= file.printTime %>
+          </p>
+          <p>Materials: <%= file.material %>
+          </p>
+          <p>Requires Glue: <%= file.glue ? 'Yes' : 'No' %>
+          </p>
+          <p>Pieces: <%= file.pieces %>
+          </p>
+          <p>Weight: <%= file.weight %>
+          </p>
+          <p><a href="<%= file.link %>">Instruction Manual</a></p>
+          <div class="images">
+            <img src="/uploads/ModelCovers/<%= file.coverImageNames[0] %>" alt="<%= file.title %>" class="file-image">
+          </div>
+        </li>
+        <% }) %>
+    </ul>
   </div>
   <div class="cars-text">
     <h1>Latest accessories</h1>
