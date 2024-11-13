@@ -28,13 +28,31 @@
     <ul>
       <% allFiles.forEach(file=> { %>
         <li>
-          <h3>
-            <%= file.title %>
-          </h3>
-          <p><%= file.price  %></p>
           <div class="images">
             <img src="/uploads/ModelCovers/<%= file.coverImageNames[0] %>" alt="<%= file.title %>" class="file-image">
           </div>
+          <h3 class="title">
+            <%= file.title %>
+          </h3>
+          <div class="container">
+            <div class="infos">
+              <p class="price">
+                $<%= file.price %>
+              </p>
+              <div class="stats">
+                <div class="downcount">
+                  <img src="/Icons/Downloads.svg" alt="Downloads" class="downloads">
+                  <p>100+</p>
+                </div>
+                <div class="reviewcount">
+                  <img src="/Icons/RatingStar.svg" alt="Rating" class="ratings">
+                  <p>5</p>
+                </div>
+              </div>
+            </div>
+          
+          <a href="#" class="addtocart">Add to cart</a>
+        </div>
         </li>
         <% }) %>
     </ul>
