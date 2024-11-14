@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= file.title%></title>
+    <link rel="stylesheet" href="stylesheets/itemfull.css">
+</head>
+
+<body>
+    <div class="header">
+        <%- include("partials/header") %>
+    </div>
+    <div class="container">
+        <div class="images">
+            <% file.coverImageNames.forEach(function(coverImageName) { %>
+              <img src="../uploads/ModelCovers/<%= coverImageName %>" alt="<%= file.title %>" class="file-image">
+            <% }); %>
+          </div>
+        <div class="infos">
+            <div class="title">
+                <h3><% file.title %></h3>
+                <div class="stats">
+                    <div class="downcount">
+                        <img src="/Icons/Downloads.svg" alt="Downloads" class="downloads">
+                        <p>100+</p>
+                    </div>
+                    <div class="reviewcount">
+                        <img src="/Icons/RatingStar.svg" alt="Rating" class="ratings">
+                        <p>5</p>
+                    </div>
+            </div>
+            
+            <p></p>
+        </div>
+    </div>
+    <div class="footer">
+        <%- include("partials/footer") %>
+    </div>
+</body>
+
+</html>

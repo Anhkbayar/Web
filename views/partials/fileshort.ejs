@@ -1,0 +1,109 @@
+<style>
+    .cars-list li {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 16px;
+        box-shadow: 4px 4px 16px 1px rgba(0, 0, 0, 0.25);
+        height: 360px;
+        width: 295px;
+
+    }
+
+    .cars-list li .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 30px 30px 30px;
+    }
+
+    .cars-list li .infos {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .cars-list li .stats {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .cars-list .title {
+        font-size: 1.5em;
+        font-weight: 450;
+    }
+
+    .cars-list .price {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+
+    .cars-list li .downcount,
+    .reviewcount {
+        display: flex;
+    }
+
+    .cars-list .downloads {
+        height: 18px;
+    }
+
+    .cars-list .ratings {
+        height: 16px;
+    }
+
+    .cars-list .addtocart:link,
+    .cars-list .addtocart:visited {
+        font-size: 1em;
+        font-weight: 600;
+        color: white;
+        background-color: #3b93a7;
+        text-align: center;
+        padding: 15px 0px;
+        width: 100%;
+        border-radius: 13px;
+    }
+
+    .cars-list .addtocart:hover {
+        background-color: #2f8295;
+    }
+
+    .cars-list .file-image {
+        padding: 30px 30px 10px 30px;
+        height: 190px;
+        width: 100%;
+        overflow: hidden;
+    }
+</style>
+<li>
+    <a href="/product/<%= file.id %>">
+        <div class="images">
+            <img src="../uploads/ModelCovers/<%= file.coverImageNames[0] %>" alt="<%= file.title %>" class="file-image">
+        </div>
+        <h3 class="title">
+            <%= file.title %>
+        </h3>
+        <div class="container">
+            <div class="infos">
+                <p class="price">
+                    $<%= file.price %>
+                </p>
+                <div class="stats">
+                    <div class="downcount">
+                        <img src="/Icons/Downloads.svg" alt="Downloads" class="downloads">
+                        <p>100+</p>
+                    </div>
+                    <div class="reviewcount">
+                        <img src="/Icons/RatingStar.svg" alt="Rating" class="ratings">
+                        <p>5</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="addtocart">Add to cart</a>
+
+        </div>
+    </a>
+</li>

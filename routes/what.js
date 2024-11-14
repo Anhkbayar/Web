@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
 });
 
 
-
 router.get('/aboutMe', (req, res) => {
     res.render('aboutMe.ejs')
 })

@@ -12,6 +12,7 @@ const methodOverride = require('method-override');
 const userRouter = require('./routes/user');
 const fileRouter = require('./routes/files');
 const headerRouter = require('./routes/what');
+const productRouter = require('./routes/products');
 
 const connect = require('./db');
 
@@ -34,5 +35,6 @@ app.use(methodOverride('_method'));
 app.use('/', userRouter);
 app.use('/', fileRouter);
 app.use('/', headerRouter);
+app.use('/', productRouter);
 
 app.listen(3000);

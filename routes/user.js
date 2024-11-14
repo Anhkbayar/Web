@@ -67,6 +67,10 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/item', async(req, res)=>{
+    res.render('filefull.ejs')
+})
+
 router.delete('/logout', (req, res, next) => {
     req.logOut((err) => {
         if (err) {
