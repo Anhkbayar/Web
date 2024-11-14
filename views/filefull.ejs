@@ -4,23 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= file.title%></title>
-    <link rel="stylesheet" href="stylesheets/itemfull.css">
+    <title>
+        <%= file.title%>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/itemfull.css">
 </head>
 
 <body>
     <div class="header">
         <%- include("partials/header") %>
     </div>
-    <div class="container">
+    <div class="container-content">
         <div class="images">
             <% file.coverImageNames.forEach(function(coverImageName) { %>
-              <img src="../uploads/ModelCovers/<%= coverImageName %>" alt="<%= file.title %>" class="file-image">
-            <% }); %>
-          </div>
+                <div class="image">
+                    <img src="../uploads/ModelCovers/<%= coverImageName %>" alt="<%= file.title %>" class="file-image">
+                </div>
+                <% }); %>
+        </div>
         <div class="infos">
             <div class="title">
-                <h3><% file.title %></h3>
+                <h3>
+                    <%= file.title %>
+                </h3>
                 <div class="stats">
                     <div class="downcount">
                         <img src="/Icons/Downloads.svg" alt="Downloads" class="downloads">
@@ -30,13 +36,68 @@
                         <img src="/Icons/RatingStar.svg" alt="Rating" class="ratings">
                         <p>5</p>
                     </div>
+                </div>
             </div>
-            
-            <p></p>
+            <hr>
+            <div class="info-table">
+                <table>
+                    <tr>
+                        <td>Printing time</td>
+                        <th>
+                            <%= file.printTime %>
+                        </th>
+                        <td>Glue</td>
+                        <th>
+                            <%= file.glue? "Yes" :"No" %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Bed Size</td>
+                        <th>220x220mm</th>
+                        <td>Weight</td>
+                        <th>
+                            <%= file.weight %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Material</td>
+                        <th>
+                            <%= file.material %>
+                        </th>
+                        <td>Pieces</td>
+                        <th>
+                            <%= file.pieces %>
+                        </th>
+                    </tr>
+                </table>
+                <p class="filelink">click <a href="<%= file.link %>">here</a> for instruction manual</p>
+            </div>
+            <hr>
+            <div class="buy">
+                <p class="price">
+                    $<%= file.price %>
+                </p>
+                <a href="#" class="cartadd">Add to cart</a>
+            </div>
         </div>
     </div>
+    <div class="description">
+        <%= file.description %>
+    </div>
+    <div class="xray">
+
+    </div>
+    <div class="related">
+        <h3>Related Products</h3>
+        <ul>
+            <% for (let i = 0; i < allFiles.length; i++) { %>
+              <%- include('partials/fileshort', { file: allFiles[i] }) %>
+              <% if(i==4){ break} %>
+            <% } %>
+          </ul>
+    </div>
     <div class="footer">
-        <%- include("partials/footer") %>
+        <%- include('partials/footer') %>
     </div>
 </body>
 

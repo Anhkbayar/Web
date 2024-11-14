@@ -5,10 +5,112 @@
     padding: 0;
     font-family: 'Commissioner', sans-serif;
 }
-.container{
-    padding: 0px 80px;
+
+.container-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 60px 80px 10px 80px;
+
 }
-img{
+
+.title h3 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.title .stats {
+    display: flex;
+    gap: 20px;
+}
+
+.title .stats .downcount,
+.reviewcount {
+    display: flex;
+}
+.title .reviewcount{
+    padding: 10px 0px;
+}
+
+hr {
+    width: 630px;
+    border: 1px solid black;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+}
+
+.images .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 200px;
     width: 290px;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.info-table {
+    background-color: #fff;
+    max-width: 630px;
+    width: 100%;
+}
+
+table {
+    padding: 10px 0px;
+    width: 100%;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 10px 0px;
+}
+
+.buy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+}
+
+.buy .cartadd {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: white;
+    background-color: #3b93a7;
+    padding: 15px 70px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+    transition: ease 0.5s;
+}
+.buy .cartadd:hover{
+    background-color: #2f8295;
+}
+
+.buy .price {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.filelink {
+    padding: 0px 0px 10px 0px;
+}
+.description{
+    padding: 20px 80px;
+}
+.file-image {
+    width: 100%;
+
+}
+.related h3{
+    padding: 0px 80px;
+    font-size: 32px;
+    font-weight: bold;
+}
+.footer {
+    width: 100%;
 }

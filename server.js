@@ -23,7 +23,7 @@ app.set('view-engine', 'ejs');
 
 app.use(express.urlencoded({ extended: true })); // Parses form data as URL-encoded data
 app.use(express.json())
-app.use( express.static( "public" ) );
+app.use(express.static( "public" ) );
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
