@@ -13,8 +13,23 @@
     <%- include("partials/header") %>
   </div>
   <div class="top-wrapper">
-    <img src="/Icons/background.png" alt="background" id="bg">
-    <img src="/Icons/cars.png" alt="cars" id="cars">
+    <div class="bigpic">
+      <img src="/Icons/background.png" alt="background" id="bg">
+    </div>
+    <img src="/Icons/cars.png" alt="cars" class="cars">
+    <div class="text-pos">
+      <div class="content">
+        <div class="content__container">
+          <p>Our design</p>
+          <p>is</p>
+          <ul class="content__container__list">
+            <li class="content__container__list__item">clean</li>
+            <li class="content__container__list__item">problem free</li>
+            <li class="content__container__list__item">clever</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <form action="/cars">
       <button type="submit" class="shop">Shop Now</button>
     </form>
@@ -25,10 +40,10 @@
   </div>
   <div class="cars-list">
     <ul>
-      <% for (let i = 0; i < allFiles.length; i++) { %>
+      <% for (let i=0; i < allFiles.length; i++) { %>
         <%- include('partials/fileshort', { file: allFiles[i] }) %>
-        <% if(i==4){ break} %>
-      <% } %>
+          <% if(i==4){ break} %>
+            <% } %>
     </ul>
   </div>
   <div class="cars-text">
@@ -37,15 +52,39 @@
   </div>
   <div class="cars-list">
     <ul>
-      <% for (let i = 0; i < allFiles.length; i++) { %>
+      <% for (let i=0; i < allFiles.length; i++) { %>
         <%- include('partials/fileshort', { file: allFiles[i] }) %>
-        <% if(i==4){ break} %>
-      <% } %>
+          <% if(i==4){ break} %>
+            <% } %>
     </ul>
   </div>
   <div class="footer">
     <%- include("partials/footer") %>
   </div>
 </body>
+<script>
+  const slidingText = document.querySelector('.sliding-text');
+  const words = ["clean", "problem free", "clever"];
+
+  let index = 0;
+
+  function changeText() {
+    slidingText.style.transition = 'ease';
+    slidingText.style.transform = 'translateY(0)';
+    index = (index + 1) % words.length;
+
+    setTimeout(() => {
+      slidingText.style.transition = 'transform 1s';
+      slidingText.style.transform = `translateY(-100%)`;
+
+      setTimeout(() => {
+        slidingText.textContent = words[index];
+      }, 400);
+    }, 2000);
+  }
+
+  setInterval(changeText, 2000);
+
+</script>
 
 </html>

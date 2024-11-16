@@ -13,41 +13,55 @@
     width: 100%;
 }
 
-.top-wrapper #bg {
+.top-wrapper .bigpic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
+    overflow: hidden;
+}
+
+.top-wrapper #bg {
+    width: 100%;
+}
+
+.top-wrapper .cars {
+    position: absolute;
+    z-index: 1;
+    top: -30px;
+    right: 30px;
+    width: 1000px;
 }
 
 .top-wrapper .shop {
     position: absolute;
-    /* set button to an absolute position */
     bottom: 10px;
-    /* adjust the top position of the button */
     right: 80px;
-    /* adjust the left position of the button */
     z-index: 2;
-    /* set a higher z-index than the image */
     font-size: 2.5em;
     font-weight: 600;
     border-radius: 14px;
     background-color: #3b93a7;
-    /* set your desired background color */
     color: #fff;
-    /* set your desired text color */
     border: none;
-    /* remove button border */
     padding: 20px 35px;
-    /* set your desired padding */
     cursor: pointer;
-    /* change mouse cursor on hover */
+    transition: ease 0.3;
 }
 
-.top-wrapper .shop:hover {
-    background-color: #2f8295;
+.top-wrapper.shop:hover {
+    background-color: #1e6373;
+}
+
+.top-wrapper .text-pos {
+    position: absolute;
+    top: 100px;
+    left: 80px;
 }
 
 .cars-text {
-    margin: 10px 80px;
+    margin: 30px 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,4 +83,15 @@
     display: flex;
     gap: 30px;
     margin: 10px 80px;
+}
+
+.content__container {
+    font-size: 5em;
+    font-weight: 600;
+}
+
+.content__container li {
+    background: -webkit-linear-gradient(#3b93a7, #17FF74);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

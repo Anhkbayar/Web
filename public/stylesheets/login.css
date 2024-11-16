@@ -6,16 +6,19 @@
     box-sizing: border-box;
     font-family: 'Commissioner', sans-serif;
 }
-#header_container,
-#footer_container {
-    width: 100%;
-}
+
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
     height: 100vh;
     background-color: #f4f6f6;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login {
@@ -27,16 +30,15 @@ body {
     padding: 10px 20px;
     background-color: #ffffff;
     border-radius: 45px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-    margin-top: auto;
-    margin-bottom: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
-h1{
+
+h1 {
     font-size: 64px;
     text-align: center;
 }
 
-.login input[type="checkbox"]{
+.login input[type="checkbox"] {
     height: 16px;
     width: 16px;
     margin: 10px 0 10px 0;
@@ -63,13 +65,21 @@ h1{
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .login input[type="submit"]:hover {
     background-color: #27788a;
 }
-.texts{
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.texts {
     display: flex;
     gap: 100px;
 }

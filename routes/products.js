@@ -8,7 +8,6 @@ router.get('/product/:id', async (req, res) => {
         const allfiles = await Filemodel.find();
         if (!file && !allfiles)
             return res.status(404).send("Product not found");
-        console.log(allfiles)
         res.render('filefull.ejs', { file, allfiles, error:null });
     } catch (error) {
         console.log(error)
