@@ -75,7 +75,7 @@
             <hr>
             <div class="buy">
                 <p class="price">
-                    $<%= file.price %>
+                    <%= file.price? "$"+file.price : "free" %>
                 </p>
                 <a href="#" class="cartadd">Add to cart</a>
             </div>
@@ -87,11 +87,11 @@
     <div class="xray">
 
     </div>
-    <div class="related">
+    <div class="cars-list">
         <h3>Related Products</h3>
         <ul>
-            <% for (let i = 0; i < allFiles.length; i++) { %>
-              <%- include('partials/fileshort', { file: allFiles[i] }) %>
+            <% for (let i = 0; i < allfiles.length; i++) { %>
+              <%- include('partials/fileshort', { files: allfiles[i] }) %>
               <% if(i==4){ break} %>
             <% } %>
           </ul>

@@ -28,7 +28,8 @@
 .reviewcount {
     display: flex;
 }
-.title .reviewcount{
+
+.title .reviewcount {
     padding: 10px 0px;
 }
 
@@ -87,7 +88,8 @@ th {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
     transition: ease 0.5s;
 }
-.buy .cartadd:hover{
+
+.buy .cartadd:hover {
     background-color: #2f8295;
 }
 
@@ -99,18 +101,26 @@ th {
 .filelink {
     padding: 0px 0px 10px 0px;
 }
-.description{
+
+.description {
     padding: 20px 80px;
 }
+
 .file-image {
     width: 100%;
 
 }
-.related h3{
-    padding: 0px 80px;
+
+.cars-list{
+    margin: 0px 80px;
+}
+.cars-list h3 {
     font-size: 32px;
     font-weight: bold;
 }
-.footer {
-    width: 100%;
+
+.cars-list ul {
+    display: flex;
+    gap: 30px;
+    margin: 10px 0;
 }

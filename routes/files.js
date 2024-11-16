@@ -17,7 +17,7 @@ const upload = multer({
 router.get('/adminHome', (req, res) => {
     res.render('admin/adminHome.ejs')
 })
-// Route to display all files
+// Buh filuudiig haruuldag
 router.get('/allFiles', async (req, res) => {
     try {
         const allFiles = await Filemodel.find();
@@ -30,7 +30,7 @@ router.get('/allFiles', async (req, res) => {
 router.get('/addFile', async (req, res) => {
     await res.render('admin/addFile.ejs')
 })
-// Route to add a new "file" entry
+// Shine file nemdeg shi
 router.post('/addFile', upload.array('photos', 4), async (req, res) => {
     const { title, description,price, link, printTime, material, glue, pieces, weight } = req.body;
     const fileNames = req.files ? req.files.map(file => file.filename) : [];

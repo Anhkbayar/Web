@@ -36,8 +36,7 @@ const fileSchema = mongoose.Schema({
         required: [true]
     },
     price:{
-      type: Number,
-      required: [true]
+      type: Number
     },
     coverImageNames: {
       type: [String],
