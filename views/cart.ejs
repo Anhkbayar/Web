@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="stylesheets/cart.css">
+</head>
+
+<body>
+    <div class="header">
+        <%- include('partials/header') %>
+    </div>
+    <h1>Your Cart</h1>
+    <div class="cart-page">
+        <div class="cart-container">
+            <div class="cart-items">
+                <div class="cart-item">
+                    <div class="image">
+                        <img src="/Icons/car3.png" alt="Hotrod model">
+                    </div>
+                    <div class="info">
+                        <h2>Hotrod model 1/10 scale</h2>
+                        <p>✅ Stl files</p>
+                        <p>✅ Instructions</p>
+                        <hr>
+                        <p class="price">42.99$</p>
+                    </div>
+                    <div class="remove">
+                        <button>&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-summary">
+                <div class="summary">
+                    <p>Subtotal <span>$85.98</span></p>
+                    <p>Taxes <span>$0.00</span></p>
+                    <hr>
+                    <p><strong>Total</strong> <span><strong>$85.98</strong></span></p>
+                    <button class="checkout-btn">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <%- include('partials/footer') %>
+    </div>
+</body>
+
+</html>

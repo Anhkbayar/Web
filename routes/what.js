@@ -11,7 +11,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-
+router.get('/cart', async (req, res) => {
+    res.render('cart.ejs')
+})
 router.get('/aboutMe', (req, res) => {
     res.render('aboutMe.ejs')
 })
