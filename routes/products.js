@@ -15,5 +15,7 @@ router.get('/product/:id', async (req, res) => {
         
     }
 });
-
+router.get('/successfull', async (req, res) =>{
+    res.render('successfull.ejs')
+})
 module.exports = router;
