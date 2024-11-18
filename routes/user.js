@@ -71,6 +71,14 @@ router.get('/item', async(req, res)=>{
     res.render('filefull.ejs')
 })
 
+router.get('/userDetails' ,(req,res)=>{
+    res.render('user/accountDetails.ejs')
+})
+
+router.get('/userDownloads', (req,res)=>{
+    res.render('user/userDownloads.ejs')
+})
+
 router.delete('/logout', (req, res, next) => {
     req.logOut((err) => {
         if (err) {
@@ -79,5 +87,6 @@ router.delete('/logout', (req, res, next) => {
         res.redirect('/login');
     });
 });
+
 
 module.exports = router
