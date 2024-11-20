@@ -17,6 +17,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.18.1",
     "filepond": "^4.32.1",
+    "filepond-plugin-image-preview": "^4.6.12",
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^8.8.0",

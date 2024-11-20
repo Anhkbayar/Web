@@ -18,4 +18,11 @@ router.get('/product/:id', async (req, res) => {
 router.get('/successfull', async (req, res) =>{
     res.render('successfull.ejs')
 })
+
+router.get('/checkout', async(req, res)=>{
+    const checkfile = await Filemodel.findById(req.params.id);
+    if(checkfile.price)
+        res.render('cartinfo.ejs')
+    res.render('successfull.ejs')
+})
 module.exports = router;

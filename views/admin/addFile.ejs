@@ -6,9 +6,12 @@
     <title>Anka_Customs</title>
     <link rel="stylesheet" href="/stylesheets/addFile.css">
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet" />
 
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
+    <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
 
@@ -21,27 +24,54 @@
         <%- include('sidebar') %>
     </div>
     <form action="/addFile" method="post" enctype="multipart/form-data">
-        <%- include('_form_fields') %>
-            <a href="/allFiles">Cancel</a>
-            <button type="submit">Upload</button>
+        <div class="form-cont">
+            <%- include('_form_fields') %>
+        </div>
+        <a href="/allFiles">Cancel</a>
+        <button type="submit">Upload</button>
     </form>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
     <script>
+        const photoElement = document.querySelector('input[name="photos"]');
+        const fileElement = document.querySelector('input[name="carfiles"]');
+        const chassisElement = document.querySelector('input[name="chassispic"]')
         FilePond.registerPlugin(
             FilePondPluginImagePreview,
             FilePondPluginImageResize,
             FilePondPluginFileEncode,
         )
-        FilePond.create(document.querySelector('input[name="photos"]'), {
+        FilePond.create(photoElement, {
             allowMultiple: true,
+            allowImagePreview: false,
+            allowFileEncode: true,
             maxFiles: 4,
             acceptedFileTypes: ['image/jpeg', 'image/png', 'image/gif'],
             server: {
-                process: '/addFile', 
-                revert: null,     
+                process: '/addFile',
+                revert: null,
             }
         });
+        FilePond.create(fileinsert, {
+            allowMultiple: true,
+            acceptedFileTypes: 'application/sla',
+            allowFileEncode: true,
+            server: {
+                process: '/addFile',
+                revert: null,
+            }
+
+        })
+        FilePond.create(chassisInsert, {
+            allowMultiple: true,
+            maxFiles: 2,
+            allowFileEncode: true,
+            acceptedFileTypes: ['image/jpeg', 'image/png', 'image/gif'],
+            server: {
+                process: '/addFile',
+                revert: null,
+            }
+        })
     </script>
 </body>
 

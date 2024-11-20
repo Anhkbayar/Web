@@ -79,6 +79,8 @@ router.get('/userDownloads', (req,res)=>{
     res.render('user/userDownloads.ejs')
 })
 
+/
+
 router.delete('/logout', (req, res, next) => {
     req.logOut((err) => {
         if (err) {
