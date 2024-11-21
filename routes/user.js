@@ -3,7 +3,9 @@ const router = express.Router()
 const userModel = require('../models/usermodel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
+router.use(cookieParser());
 
 router.get('/login', (req, res) => {
     res.render('login/login.ejs');
@@ -27,12 +29,12 @@ router.post('/login', async (req, res) => {
         }
 
         // Authentication successful
-        const token = jwt.sign(user.toObject(), process.env.MY_SECRET)
+        const token = jwt.sign(
+            { id: user._id, name: user.username },
+            process.env.MY_SECRET,
+            { expiresIn: "1h" })
 
-        res.cookie("token", token, {
-            httpOnly: true,
-        })
-
+        res.cookie("token", token)
         return res.redirect('/')
 
 
@@ -67,27 +69,21 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/item', async(req, res)=>{
+router.get('/item', async (req, res) => {
     res.render('filefull.ejs')
 })
 
-router.get('/userDetails' ,(req,res)=>{
+router.get('/userDetails', (req, res) => {
     res.render('user/accountDetails.ejs')
 })
 
-router.get('/userDownloads', (req,res)=>{
+router.get('/userDownloads', (req, res) => {
     res.render('user/userDownloads.ejs')
 })
 
-/
-
-router.delete('/logout', (req, res, next) => {
-    req.logOut((err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/login');
-    });
+router.get('/logout', (req, res) => {
+    res.clearCookie('token'); 
+    return res.redirect('/login'); 
 });
 
 
