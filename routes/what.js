@@ -1,21 +1,17 @@
 const express = require('express');
 const authenticateToken = require('../middleware/authenticateToken');
 const Filemodel = require('../models/filemodel')
+const UserModel = require('../models/usermodel')
 const router = express.Router();
 
-router.get('/', authenticateTokens, async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
     try {
-        const user = await userModel.findById(req.user.id);
+        const user = await UserModel.findById(req.user.id);
         const allFiles = await Filemodel.find();
-        console.log(authenticateToken);
         res.render('index.ejs', { allFiles, username: user.username, error: null });
     } catch (error) {
         res.render('index.ejs', { allFiles: [], error: "Error retrieving files" });
     }
-});
-
-router.get('/profile', authenticateToken, (req, res) => {
-    res.render('profile', { user: req.user });
 });
 
 router.get('/cart', async (req, res) => {
