@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 router.use(cookieParser());
 
 router.get('/login', (req, res) => {
-    res.render('login/login.ejs', {username: null});
+    res.render('login/login.ejs', { username: null });
 });
 
 router.post('/login', async (req, res) => {
@@ -67,16 +67,16 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/item', async (req, res) => {
-    res.render('filefull.ejs')
-})
-
-router.get('/userDetails', (req, res) => {
+router.get('/profile', (req, res) => {
     res.render('user/accountDetails.ejs')
 })
 
-router.get('/userDownloads', (req, res) => {
+router.get('/downloads', (req, res) => {
     res.render('user/userDownloads.ejs')
+})
+
+router.get('/cart', async (req, res) => {
+    res.render('cart.ejs')
 })
 
 router.get('/logout', (req, res) => {

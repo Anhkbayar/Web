@@ -4,25 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Downloads</title>
+    <link rel="stylesheet" href="/stylesheets/downloadStyle.css">
 </head>
 <body>
+    <div class="header">
+        <%- include('../partials/header.ejs', {username: 'hun'})  %>
+    </div>
     <div class="container">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <button class="sidebar-button active" onclick="window.location.href='userpanelAccountDetails.html'">
-                <img src="Icons/user.png" alt="Account Icon"> Account details
-            </button>
-            <button class="sidebar-button">
-                <img src="Icons/download.webp" alt="Download Icon"> Downloads
-            </button>
-            <button class="sidebar-button" onclick="window.location.href='Login.html'">
-                <img src="Icons/logout.png" alt="Logout Icon"> Log out
-            </button>
-        </aside>
+        <div class="sidebar-container">
+            <%- include('../partials/userSidebar.ejs') %>
+        </div>
 
         <!-- Content -->
         <div class="content">
-            <h2>Account Details</h2>
+            <h2>Downloads</h2>
             <table>
                 <thead>
                     <tr>

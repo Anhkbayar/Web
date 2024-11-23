@@ -1,0 +1,42 @@
+<style>
+    .sidebar{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+    }
+    
+    .sidebar a.button:link,
+    .sidebar a.button:visited {
+        text-decoration: none;
+        color: black;
+        padding: 8px 30px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
+    }
+    .sidebar a.button:hover,
+    .sidebar a.button:active{
+        background-color: #3B93A7;
+        color: white;
+    }
+    .sidebar a.button img {
+        filter: invert(0%);
+    }
+    
+    /* Change SVG color to white on hover/active */
+    .sidebar a.button:hover img,
+    .sidebar a.button:active img {
+        filter: invert(100%);
+    }
+</style>
+<div class="sidebar">
+    <a href="/profile" class="button">
+        <img src="Icons/user.svg" alt="Account Icon"> Account details
+    </a>
+    <a href="/downloads" class="button">
+        <img src="Icons/owned.svg" alt="Downloads"> Downloads
+    </a>
+    <a href="/logout" class="button">
+        <img src="Icons/logout.svg" alt="Logout"> Logout
+    </a>
+</div>
