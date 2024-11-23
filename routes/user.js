@@ -81,7 +81,7 @@ router.get('/cart', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
-    return res.redirect('/login');
+    return res.redirect('/');
 });
 
 

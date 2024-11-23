@@ -19,11 +19,10 @@ router.get('/', authenticateToken, async (req, res) => {
 router.get('/aboutMe', (req, res) => {
     res.render('aboutMe.ejs')
 })
+
 router.get('/terms', (req, res) => {
     res.render('terms.ejs')
 })
 
-router.get('/item', async (req, res) => {
-    res.render('filefull.ejs')
-})
+
 module.exports = router

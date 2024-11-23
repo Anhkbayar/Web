@@ -25,4 +25,15 @@ router.get('/checkout', async(req, res)=>{
         res.render('cartinfo.ejs')
     res.render('successfull.ejs')
 })
+
+router.get('/item', async (req, res) => {
+    res.render('filefull.ejs')
+})
+
+router.get('/cars', (req, res)=>{
+    res.render('cars.ejs')
+})
+router.get('/accessories', (req, res)=>{
+    res.render('accessories.ejs')
+})
 module.exports = router;
