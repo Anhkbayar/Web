@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 router.use(cookieParser());
 
 router.get('/login', (req, res) => {
-    res.render('login/login.ejs');
+    res.render('login/login.ejs', {username: null});
 });
 
 router.post('/login', async (req, res) => {
@@ -36,8 +36,6 @@ router.post('/login', async (req, res) => {
 
         res.cookie("token", token)
         return res.redirect('/')
-
-
 
     } catch (error) {
         console.error(error);
@@ -82,8 +80,8 @@ router.get('/userDownloads', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    res.clearCookie('token'); 
-    return res.redirect('/login'); 
+    res.clearCookie('token');
+    return res.redirect('/login');
 });
 
 

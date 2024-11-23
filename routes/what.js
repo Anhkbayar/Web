@@ -5,12 +5,14 @@ const UserModel = require('../models/usermodel')
 const router = express.Router();
 
 router.get('/', authenticateToken, async (req, res) => {
-    try {
+    const allFiles = await Filemodel.find();
+
+    if (req.user) {
         const user = await UserModel.findById(req.user.id);
-        const allFiles = await Filemodel.find();
         res.render('index.ejs', { allFiles, username: user.username, error: null });
-    } catch (error) {
-        res.render('index.ejs', { allFiles: [], error: "Error retrieving files" });
+    }
+    else {
+        res.render('index.ejs', { allFiles, username: null, error: null });
     }
 });
 

@@ -1,19 +1,23 @@
 const jwt = require('jsonwebtoken');
+
 function authenticateToken(req, res, next) {
-    const token = req.cookies.token; // Get token from cookies
+    const token = req.cookies.token; // Extract the token from cookies
     if (!token) {
-        console.error('Token is missing'); // Log for debugging
-        return res.redirect('/login'); // Redirect to login if no token is found
+        console.error('Token is missing');
+        req.user = null; // Explicitly set `req.user` to null if token is not present
+        return next(); // Continue without redirecting
     }
+
     try {
-        const decoded = jwt.verify(token, process.env.MY_SECRET);
-        req.user = decoded; // Attach decoded token data to the request
-        next();
+        const decoded = jwt.verify(token, process.env.MY_SECRET); // Verify the token
+        req.user = decoded; // Attach the decoded token to the request
+        console.log('Authenticated user:', decoded);
     } catch (err) {
-        console.error(err);
-        res.clearCookie('token'); // Clear invalid token
-        return res.redirect('/login');
+        console.error('Invalid token:', err.message);
+        req.user = null; // If token verification fails, set `req.user` to null
     }
+    
+    next(); // Proceed to the next middleware or route handler
 }
 
-module.exports = authenticateToken
+module.exports = authenticateToken;
