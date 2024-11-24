@@ -4,6 +4,7 @@ const userModel = require('../models/usermodel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
+const authenticateToken = require('../middleware/authenticateToken')
 
 router.use(cookieParser());
 
@@ -30,7 +31,7 @@ router.post('/login', async (req, res) => {
 
         // Authentication successful
         const token = jwt.sign(
-            { id: user._id, name: user.username },
+            { id: user._id, name: user.username, email: user.email },
             process.env.MY_SECRET,
             { expiresIn: "1h" })
 
@@ -67,17 +68,60 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/profile', (req, res) => {
-    res.render('user/accountDetails.ejs')
+router.get('/profile',authenticateToken, (req, res) => {
+    const email = req.user.email
+    const password = req.user.password
+    res.render('user/accountDetails.ejs', {email, password})
 })
 
 router.get('/downloads', (req, res) => {
+
     res.render('user/userDownloads.ejs')
 })
 
 router.get('/cart', async (req, res) => {
     res.render('cart.ejs')
 })
+
+router.get('/resetPassword', async (req, res)=>{
+    const { email, password, newpassword, matchpassword } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+    }
+
+    if (newpassword && newpassword !== matchpassword) {
+        return res.status(400).json({ message: "New passwords do not match" });
+    }
+
+    try {
+      //useriig email eer ni haigaad
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check current password if provided
+        if (password) {
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                return res.status(400).json({ message: "Current password is incorrect" });
+            }
+        }
+
+        // Update password if a new password is provided
+        if (newpassword) {
+            const hashedPassword = await bcrypt.hash(newpassword, 10);
+            user.password = hashedPassword;
+        }
+
+        await user.save();
+        res.status(200).json({ message: "Password updated successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
 
 router.get('/logout', (req, res) => {
     res.clearCookie('token');

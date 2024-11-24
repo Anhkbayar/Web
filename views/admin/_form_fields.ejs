@@ -1,49 +1,50 @@
 <style>
-  .textcontrol{
+  .textcontrol {
     display: flex;
     flex-direction: column;
   }
-  .filecontrol{
+
+  .filecontrol {
     display: flex;
     flex-direction: column;
   }
 </style>
 
 <div class="textcontrol">
-<label for="title">Item Title</label>
-<input type="text" name="title" required>
+  <label for="title">Item Title</label>
+  <input type="text" name="title" required>
 
-<label for="description">Description</label>
-<textarea name="description" required></textarea>
+  <label for="description">Description</label>
+  <textarea name="description" required></textarea>
 
-<label for="price">Price</label>
-<input type="number" name="price" min="0" max="1000" step="0.01">
+  <label for="price">Price</label>
+  <input type="number" name="price" min="0" max="1000" step="0.01">
 
-<label for="link">Instruction manual link</label>
-<input type="url" name="link" required>
+  <label for="link">Instruction manual link</label>
+  <input type="url" name="link" required>
 
-<label for="printTime">Print Time</label>
-<input type="text" name="printTime" required>
+  <label for="printTime">Print Time</label>
+  <input type="text" name="printTime" required>
 
-<label for="material">Materials</label>
-<input type="text" name="material" required>
+  <label for="material">Materials</label>
+  <input type="text" name="material" required>
 
-<label for="glue">Requires Glue</label>
-<input type="checkbox" name="glue">
+  <label for="glue">Requires Glue</label>
+  <input type="checkbox" name="glue">
 
-<label for="pieces">Number of Pieces</label>
-<input type="number" name="pieces" required>
+  <label for="pieces">Number of Pieces</label>
+  <input type="number" name="pieces" required>
 
-<label for="weight">Weight</label>
-<input type="text" name="weight" required>
+  <label for="weight">Weight</label>
+  <input type="text" name="weight" required>
 </div>
 <div class="fileControl">
   <label for="photos">Images</label>
-  <input type="file" name="photos" class="filepond" multiple>
+  <input type="file" name="photos" class="filepond" multiple required>
 
   <label for="carfiles">Insert STL file</label>
-  <input type="file" name="carfiles" class="filepond" multiple>
+  <input type="file" name="carfiles" class="filepond" multiple required>
 
   <label for="chassispic">Chassis and Outside pictues</label>
-  <input type="file" name="chassispic" class="filepond">
+  <input type="file" name="chassispic" class="filepond" multiple required>
 </div>

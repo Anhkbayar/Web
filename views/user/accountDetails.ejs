@@ -23,18 +23,18 @@
             <h2>Account Details</h2>
             <form class="account-form" action="/resetPassword" method="post">
                 <label for="email">Email Address*</label><br>
-                <input type="email" id="email" placeholder="your email">
+                <input type="email" id="email" value="<%= email %>">
 
                 <h3>Change Password</h3>
 
                 <label for="current-password">Current Password (Leave blank to remain unchanged)</label><br>
-                <input type="text" id="current-password"><br>
+                <input type="password" id="current-password" name="password" value="<%= password %>"><br>
 
                 <label for="new-password">New Password (Leave blank to remain unchanged)</label><br>
-                <input type="text" id="new-password"><br>
+                <input type="password" id="new-password" name="newpassword"><br>
 
                 <label for="confirm-password">Confirm new password (Leave blank to remain unchanged)</label><br>
-                <input type="text" id="confirm-password"><br><br>
+                <input type="password" id="confirm-password" name="matchpassword"><br><br>
 
                 <div class="checkbox-container">
                     <input type="checkbox" id="subscribe">

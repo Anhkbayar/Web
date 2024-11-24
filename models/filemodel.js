@@ -48,7 +48,7 @@ const fileSchema = mongoose.Schema({
     type: [String],
     required: [true]
   },
-  chassisImageName: {
+  chassisImageNames: {
     type: [String],
     required: [true]
   }

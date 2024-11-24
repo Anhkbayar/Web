@@ -110,7 +110,15 @@ th {
     width: 100%;
 
 }
-
+.xray-cont{
+    display: flex;
+    justify-content: center;
+}
+.xray{
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+}
 .cars-list{
     margin: 0px 80px;
 }

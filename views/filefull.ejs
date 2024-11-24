@@ -9,9 +9,10 @@
     </title>
     <link rel="stylesheet" href="/stylesheets/itemfull.css">
 </head>
+
 <body>
     <div class="header">
-        <%- include("partials/header", {username}) %>
+        <%- include("partials/header", {username: 'hun' }) %>
     </div>
     <div class="container-content">
         <div class="images">
@@ -74,7 +75,7 @@
             <hr>
             <div class="buy">
                 <p class="price">
-                    <%= file.price? "$"+file.price : "free" %>
+                    <%= file.price? "$" +file.price : "free" %>
                 </p>
                 <a href="#" class="cartadd">Add to cart</a>
             </div>
@@ -83,17 +84,24 @@
     <div class="description">
         <%= file.description %>
     </div>
-    <div class="xray">
-
+    <div class="xray-cont">
+        <div class="xray">
+            <% file.chassisImageNames.forEach(function(chassisImageName) { %>
+                <div class="image">
+                    <img src="../uploads/ChassisImages/<%= chassisImageName %>" alt="<%= file.title %>"
+                        class="file-image">
+                </div>
+                <% }); %>
+        </div>
     </div>
     <div class="cars-list">
         <h3>Related Products</h3>
         <ul>
-            <% for (let i = 0; i < allfiles.length; i++) { %>
-              <%- include('partials/fileshort', { files: allfiles[i] }) %>
-              <% if(i==4){ break} %>
-            <% } %>
-          </ul>
+            <% for (let i=0; i < allfiles.length; i++) { %>
+                <%- include('partials/fileshort', { files: allfiles[i] }) %>
+                    <% if(i==4){ break} %>
+                        <% } %>
+        </ul>
     </div>
     <div class="footer">
         <%- include('partials/footer') %>
