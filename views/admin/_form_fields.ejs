@@ -48,3 +48,19 @@
   <label for="chassispic">Chassis and Outside pictues</label>
   <input type="file" name="chassispic" class="filepond" multiple required>
 </div>
+<script>
+  // Select the file input element
+  const fileInput = document.querySelector('input[name="carfiles"]');
+
+  // Add an event listener to detect when files are selected
+  fileInput.addEventListener('change', function(event) {
+    const files = event.target.files;
+    
+    // Log details of each file
+    for (let i = 0; i < files.length; i++) {
+      console.log('File Name:', files[i].name);
+      console.log('File Size:', files[i].size);
+      console.log('File Type:', files[i].type);
+    }
+  });
+</script>

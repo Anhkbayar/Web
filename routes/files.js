@@ -9,7 +9,7 @@ const stlUploadPath = path.join('public', Filemodel.stlFileBasePath);
 const chassisUploadPath = path.join('public', Filemodel.chassisImageBasePath);
 
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-const stlMimeTypes = ['application/sla']
+const stlMimeTypes = ['application/sla', 'application/vnd.ms-pki.stl', 'model/stl','application/octet-stream']
 
 const upload = multer({
     limits: { fileSize: 40 * 1024 * 1024 }, 
@@ -60,9 +60,6 @@ router.post('/addFile', upload.fields([
     { name: 'carfiles', maxCount: 50 },
     { name: 'chassispic', maxCount: 2 },
 ]), async (req, res) => {
-    console.log("Files uploaded:", req.files); // Log uploaded files
-    console.log("Request body:", req.body); // Log form data
-
     const { title, description, price, link, printTime, material, glue, pieces, weight } = req.body;
 
     const photoFileName = req.files.photos ? req.files.photos.map(file => file.filename) : [];
@@ -90,5 +87,9 @@ router.post('/addFile', upload.fields([
         res.status(500).json({ error: "Error saving file data" });
     }
 });
+
+router.post('/deleteFile', async(req, res)=>{
+    const deletingFile = await Filemodel.findOne()
+})
 
 module.exports = router;
