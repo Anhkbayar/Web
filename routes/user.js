@@ -5,11 +5,14 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const authenticateToken = require('../middleware/authenticateToken')
+const setUsername = require('../middleware/setUsername')
 
 router.use(cookieParser());
+router.use(authenticateToken)
+router.use(setUsername)
 
 router.get('/login', (req, res) => {
-    res.render('login/login.ejs', { username: null });
+    res.render('login/login.ejs');
 });
 
 router.post('/login', async (req, res) => {
@@ -68,7 +71,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/profile',authenticateToken, (req, res) => {
+router.get('/profile', (req, res) => {
     const email = req.user.email
     const password = req.user.password
     res.render('user/accountDetails.ejs', {email, password})

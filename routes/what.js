@@ -1,19 +1,16 @@
-const express = require('express');
-const authenticateToken = require('../middleware/authenticateToken');
+const express = require('express')
+const authenticateToken = require('../middleware/authenticateToken')
 const Filemodel = require('../models/filemodel')
 const UserModel = require('../models/usermodel')
-const router = express.Router();
+const setUsername = require('../middleware/setUsername')
+const router = express.Router()
 
-router.get('/', authenticateToken, async (req, res) => {
+router.use(authenticateToken)
+router.use(setUsername)
+
+router.get('/', async (req, res) => {
     const allFiles = await Filemodel.find();
-
-    if (req.user) {
-        const user = await UserModel.findById(req.user.id);
-        res.render('index.ejs', { allFiles, username: user.username, error: null });
-    }
-    else {
-        res.render('index.ejs', { allFiles, username: null, error: null });
-    }
+    res.render('index.ejs', { allFiles, error: null });
 });
 
 router.get('/aboutMe', (req, res) => {
