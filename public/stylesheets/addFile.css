@@ -2,12 +2,22 @@ body {
     display: flex;
 }
 
-form{
+form {
     margin-left: 35px;
     display: flex;
     flex-direction: column;
 }
-.form-cont{
+
+.form-cont {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+
+}
+
+.textcontrol,
+.filecontrol {
+    flex: 1; /* Each takes up an equal share of the available space */
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px; /* Optional: Adds spacing between the two controls */
 }

@@ -98,7 +98,7 @@
         <h3>Related Products</h3>
         <ul>
             <% for (let i=0; i < allfiles.length; i++) { %>
-                <%- include('partials/fileshort', { files: allfiles[i] }) %>
+                <%- include('partials/fileshort', { file: allfiles[i] }) %>
                     <% if(i==4){ break} %>
                         <% } %>
         </ul>

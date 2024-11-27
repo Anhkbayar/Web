@@ -5,16 +5,18 @@ const Filemodel = require('../models/filemodel');
 router.get('/product/:id', async (req, res) => {
     try {
         const file = await Filemodel.findById(req.params.id);
-        const allfiles = await Filemodel.find();
         if (!file)
             return res.status(404).send("Product not found");
+        const allfiles = await Filemodel.find({ _id: { $ne: req.params.id } });
         res.render('filefull.ejs', { file, allfiles, error:null });
+
     } catch (error) {
         console.log(error)
         res.status(500).send("Server Error");
         
     }
 });
+
 router.get('/successfull', async (req, res) =>{
     res.render('successfull.ejs')
 })
@@ -36,4 +38,8 @@ router.get('/cars', (req, res)=>{
 router.get('/accessories', (req, res)=>{
     res.render('accessories.ejs')
 })
+
+// router.post('/addCart', (req, res)=>{
+//     const{}
+// })
 module.exports = router;
