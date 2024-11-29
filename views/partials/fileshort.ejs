@@ -113,7 +113,17 @@
                     </div>
                 </div>
             </div>
-            <a href="/addCart" class="addtocart">Add to cart</a>
+            <button class="addtocart" onclick="addtocart('<%= file.id %>')">Add to cart</button>
         </div>
     </li>
 </a>
+<script>
+    async function addtocart(fileId) {
+        const response = await fetch('/addCart', {
+            method: 'POST',
+            body: JSON.stringify({ productId: fileId }),
+        });
+        console.log('product id:', productId)
+    }
+    
+</script>

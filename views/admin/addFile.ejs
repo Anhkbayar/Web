@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=viewport-width, initial-scale=1.0">
     <title>Anka_Customs</title>
     <link rel="stylesheet" href="/stylesheets/addFile.css">
-    <!-- <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet" />
-
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script> -->
 </head>
 
 <body>
@@ -22,54 +13,48 @@
     </div>
     <form action="/addFile" method="post" enctype="multipart/form-data">
         <div class="form-cont">
-            <%- include('_form_fields') %>
+            <div class="textControl">
+                <label for="title">Item Title</label>
+                <input type="text" name="title" required>
+
+                <label for="description">Description</label>
+                <textarea name="description" required></textarea>
+
+                <label for="price">Price</label>
+                <input type="number" name="price" min="0" max="1000" step="0.01">
+
+                <label for="link">Instruction manual link</label>
+                <input type="url" name="link" required>
+
+                <label for="printTime">Print Time</label>
+                <input type="text" name="printTime" required>
+
+                <label for="material">Materials</label>
+                <input type="text" name="material" required>
+
+                <label for="glue">Requires Glue</label>
+                <input type="checkbox" name="glue">
+
+                <label for="pieces">Number of Pieces</label>
+                <input type="number" name="pieces" required>
+
+                <label for="weight">Weight</label>
+                <input type="text" name="weight" required>
+            </div>
+            <div class="fileControl">
+                <label for="photos">Images</label>
+                <input type="file" name="photos" class="filepond" multiple required>
+
+                <label for="carfiles">Insert STL file</label>
+                <input type="file" name="carfiles" class="filepond" multiple required>
+
+                <label for="chassispic">Chassis and Outside pictures</label>
+                <input type="file" name="chassispic" class="filepond" multiple required>
+            </div>
         </div>
         <a href="/allFiles">Cancel</a>
         <button type="submit">Upload</button>
     </form>
-    <!-- <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <script>
-        const photoElement = document.querySelector('input[name="photos"]');
-        const fileInsert = document.querySelector('input[name="carfiles"]');
-        const chassisInsert = document.querySelector('input[name="chassispic"]');
-        FilePond.registerPlugin(
-            FilePondPluginImagePreview,
-            FilePondPluginImageResize,
-            FilePondPluginFileEncode,
-            FilePondPluginFileValidateType
-        )
-        FilePond.create(photoElement, {
-            allowMultiple: true,
-            allowImagePreview: true,
-            allowFileEncode: true,
-            maxFiles: 4,
-            acceptedFileTypes: ['image/jpeg', 'image/png', 'image/gif'],
-            server: {
-                process: '/addFile',
-                revert: null,
-            }
-        });
-        FilePond.create(fileInsert, {
-            allowMultiple: true,
-            acceptedFileTypes: 'application/sla',
-            allowFileEncode: true,
-            server: {
-                process: '/addFile',
-                revert: null,
-            }
-
-        })
-        FilePond.create(chassisInsert, {
-            allowMultiple: true,
-            maxFiles: 2,
-            allowFileEncode: true,
-            acceptedFileTypes: ['image/jpeg', 'image/png', 'image/gif'],
-            server: {
-                process: '/addFile',
-                revert: null,
-            }
-        })
-    </script> -->
 </body>
 
 </html>

@@ -7,17 +7,54 @@ form {
     display: flex;
     flex-direction: column;
 }
-
 .form-cont {
     display: flex;
-    width: 100%;
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
 
+.textControl,
+.fileControl {
+  flex: 1;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.textControl label,
+.fileControl label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+.textcontrol input,
+.textcontrol textarea,
+.fileControl input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.form-cont button[type="submit"],
+.form-cont a {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.textcontrol,
-.filecontrol {
-    flex: 1; /* Each takes up an equal share of the available space */
-    display: flex;
-    flex-direction: column;
-    margin: 0 5px; /* Optional: Adds spacing between the two controls */
-}
+
