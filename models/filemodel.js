@@ -7,13 +7,17 @@ const chassisImageBasePath = 'uploads/ChassisImages';
 const fileSchema = mongoose.Schema({
   title: {
     type: String,
-    required: [true],
+    required: [true]
   },
   description: {
     type: String,
     required: [true]
   },
   link: {
+    type: String,
+    required: [true]
+  },
+  type: {
     type: String,
     required: [true]
   },

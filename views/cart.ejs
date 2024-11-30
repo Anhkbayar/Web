@@ -34,7 +34,8 @@
 
                         </div>
                         <div class="remove">
-                            <button>&times;</button>
+                            <button onclick="removeItem('<%= product.id %>')"><img src="/Icons/delete.svg"
+                                    alt="Delete"></button>
                         </div>
                     </li>
                     <% }); %>
@@ -52,7 +53,8 @@
                         <p><strong>Total</strong> <span><strong>
                                     $<%= parseFloat(tax) + parseFloat(sum) %>
                                 </strong></span></p>
-                        <button class="checkout-btn">Checkout</button>
+                        <a href="/cart"><button class="checkout-btn">Checkout</button></a>
+
                 </div>
             </div>
         </div>
@@ -62,7 +64,20 @@
     </div>
 </body>
 <script>
-
+    async function removeItem(fileId) {
+        try {
+            const response = await fetch('/remove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ removeID: fileId }),
+            });
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+            alert("An error occurred. Please try again.");
+        }
+    }
 </script>
 
 </html>

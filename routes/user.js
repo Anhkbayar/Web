@@ -85,7 +85,7 @@ router.get('/downloads', (req, res) => {
 
 router.post('/add-to-cart', (req, res) => {
     const { productId } = req.body;
-    console.log(productId)
+    // console.log(productId)
     if (!productId) {
         return res.status(400).json({ message: 'Product ID is required.' });
     }
@@ -104,7 +104,7 @@ router.post('/add-to-cart', (req, res) => {
     // Add product to cart
     req.session.cart.push({ productId });
 
-    console.log(req.session.cart)
+    // console.log(req.session.cart)
 
     res.json({ message: 'Item added to cart successfully.', cart: req.session.cart });
 });
@@ -126,12 +126,31 @@ router.get('/cart', async (req, res) => {
             res.status(500).send('Internal Server Error');
         }
     } else {
-        res.render('cart.ejs', { products: [] }); // Empty cart
+        res.render('cart.ejs', { products: [] });
     }
 });
 
+router.post('/remove', async (req, res) => {
+    // console.log("remove");
+    // console.log("Body:", req.body);
 
-router.get('/resetPassword', async (req, res) => {
+    const { removeID } = req.body;
+    const carts = req.session.cart || []; 
+    // console.log("Current cart:", carts);
+
+    const updatedCart = carts.filter(item => item.productId !== removeID);
+
+    if (updatedCart.length !== carts.length) {
+        req.session.cart = updatedCart 
+        console.log("Updated cart:", updatedCart)
+        return res.status(200).json({ message: "Item removed successfully" })
+    }
+    
+    console.log("Item not found in cart");
+    return res.status(404).json({ message: "Item not found in the cart" });
+});
+
+router.post('/resetPassword', async (req, res) => {
     const { email, password, newpassword, matchpassword } = req.body;
 
     if (!email) {

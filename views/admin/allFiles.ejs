@@ -19,32 +19,35 @@
           <ul>
             <% allFiles.forEach(file=> { %>
               <li>
+                <div class="images">
+                  <img src="../uploads/ModelCovers/<%= file.coverImageNames[0] %>" alt="<%= file.title %>"
+                    class="file-image">
+                </div>
                 <h3>
                   <%= file.title %>
                 </h3>
-                <p>Description: <%= file.description %>
-                </p>
-                <p>Print Time: <%= file.printTime %>
-                </p>
-                <p>Materials: <%= file.material %>
-                </p>
-                <p>Requires Glue: <%= file.glue ? 'Yes' : 'No' %>
-                </p>
-                <p>Pieces: <%= file.pieces %>
-                </p>
-                <p>Weight: <%= file.weight %>
+                <p>Price: <%= file.price? "$" +file.price : "free" %>
                 </p>
                 <p><a href="<%= file.link %>">Instruction Manual</a></p>
-                <div class="images">
-                  <% file.coverImageNames.forEach(imageName=> { %>
-                    <img src="/uploads/ModelCovers/<%= imageName %>" alt="<%= file.title %>" class="file-image">
-                    <% }) %>
-                </div>
+                <button class="delete" onclick="deleteItem('<%= file.id %>')"><img src="../Icons/removeItem.svg" alt="Delete Item"></button>
               </li>
               <% }) %>
           </ul>
           <% } %>
     </div>
 </body>
-
+<script>
+  try {
+    const response = await fetch('/deleteItem', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId: fileId }),
+    });
+    console.log(productId)
+} catch (error) {
+    console.error("Error deleting item:", error);
+}
+</script>
 </html>

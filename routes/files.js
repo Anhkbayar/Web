@@ -60,7 +60,7 @@ router.post('/addFile', upload.fields([
     { name: 'carfiles', maxCount: 50 },
     { name: 'chassispic', maxCount: 2 },
 ]), async (req, res) => {
-    const { title, description, price, link, printTime, material, glue, pieces, weight } = req.body;
+    const { title, description, price, link, printTime, material, glue, pieces, weight,type } = req.body;
 
     const photoFileName = req.files.photos ? req.files.photos.map(file => file.filename) : [];
     const stlFileName = req.files.carfiles ? req.files.carfiles.map(file => file.filename) : [];
@@ -77,6 +77,7 @@ router.post('/addFile', upload.fields([
             glue: glue === 'on',
             pieces,
             weight,
+            type,
             coverImageNames: photoFileName,
             stlFileNames: stlFileName,
             chassisImageNames: chassisFileName,

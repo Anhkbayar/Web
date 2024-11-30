@@ -117,14 +117,6 @@
                 },
                 body: JSON.stringify({ productId: fileId }),
             });
-    
-            if (response.ok) {
-                const result = await response.json();
-                alert(result.message || "Item added to cart.");
-            } else {
-                const error = await response.json();
-                alert(error.message || "Failed to add item to cart.");
-            }
         } catch (error) {
             console.error("Error adding to cart:", error);
             alert("An error occurred. Please try again.");

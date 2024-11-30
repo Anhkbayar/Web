@@ -13,12 +13,40 @@ body {
     display: flex;
 }
 
-.fileList{
+.fileList {
     margin-left: 35px;
     display: flex;
     flex-direction: column;
 }
 
-.file-image{
-    height: 100px;
+.images {
+    height: 115px;
+    width: 61px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.file-image {
+    width: 100%;
+}
+
+li{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+}
+
+.delete{
+    border: 0;
+    background-color: white;
+}
+.delete:hover{
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0,5);
+}
+.delete img{
+    height: 30px;
 }

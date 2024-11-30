@@ -41,9 +41,10 @@
   <div class="cars-list">
     <ul>
       <% for (let i=0; i < allFiles.length; i++) { %>
+        <% if(allFiles[i].type === 'Car'){ %>
         <%- include('partials/fileshort', { file: allFiles[i] }) %>
           <% if(i==4){ break} %>
-            <% } %>
+            <% }} %>
     </ul>
   </div>
   <div class="cars-text">
@@ -53,9 +54,10 @@
   <div class="cars-list">
     <ul>
       <% for (let i=0; i < allFiles.length; i++) { %>
+        <% if(allFiles[i].type === 'accessory'){ %>
         <%- include('partials/fileshort', { file: allFiles[i] }) %>
           <% if(i==4){ break} %>
-            <% } %>
+            <%} } %>
     </ul>
   </div>
   <div class="footer">

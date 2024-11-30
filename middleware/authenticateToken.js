@@ -13,7 +13,7 @@ function authenticateToken(req, res, next) {
         req.user = decoded;
         // console.log('Authenticated user:', decoded);
     } catch (err) {
-        console.error('Invalid token:', err.message);
+        // console.error('Invalid token:', err.message);
         req.user = null; 
     }
     
