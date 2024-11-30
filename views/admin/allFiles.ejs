@@ -29,7 +29,8 @@
                 <p>Price: <%= file.price? "$" +file.price : "free" %>
                 </p>
                 <p><a href="<%= file.link %>">Instruction Manual</a></p>
-                <button class="delete" onclick="deleteItem('<%= file.id %>')"><img src="../Icons/removeItem.svg" alt="Delete Item"></button>
+                <button class="delete" onclick="deleteItem('<%= file.id %>')"><img src="../Icons/removeItem.svg"
+                    alt="Delete Item" id="removeIcon"></button>
               </li>
               <% }) %>
           </ul>
@@ -37,18 +38,26 @@
     </div>
 </body>
 <script>
-  try {
-    const response = await fetch('/deleteItem', {
+  async function deleteItem(fileId) {
+    console.log("deleteItem function called with ID:", fileId);
+    try {
+      const response = await fetch('/deleteItem', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ productId: fileId }),
-    });
-    console.log(productId)
-    window.location.reload()
-} catch (error) {
-    console.error("Error deleting item:", error);
-}
+      });
+      if (response.ok) {
+        console.log("Item deleted successfully.");
+        window.location.reload();
+      } else {
+        console.error("Failed to delete item");
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  }
 </script>
+
 </html>

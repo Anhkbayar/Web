@@ -89,18 +89,18 @@ router.post('/add-to-cart', (req, res) => {
         return res.status(400).json({ message: 'Product ID is required.' });
     }
 
-    // Initialize cart in session if not exists
+    // hooson baival hoosniig uusgene
     if (!req.session.cart) {
         req.session.cart = [];
     }
 
-    // Check if product already exists
+    // baigaa esehiig shalgana
     const existingItem = req.session.cart.find(item => item.productId === productId);
     if (existingItem) {
         return res.status(400).json({ message: 'This item is already in your cart.' });
     }
 
-    // Add product to cart
+    // product iig session ruu nemne
     req.session.cart.push({ productId });
 
     // console.log(req.session.cart)
@@ -111,14 +111,14 @@ router.post('/add-to-cart', (req, res) => {
 router.get('/cart', async (req, res) => {
     const cart = req.session.cart;
     if (cart && cart.length > 0) {
-        // Extract product IDs from the cart
+        // cartaas product idnuudiig salgaj avna
         const productIds = cart.map(item => item.productId);
 
         try {
-            // Query the database for all products in the cart
+            // cart dotor baigaa buh idnuudiig db ees haina
             const products = await fileModel.find({ '_id': { $in: productIds } });
 
-            // Render the cart view with the fetched products
+            // barij avsnaa cart deer gargana
             res.render('cart.ejs', { products });
         } catch (error) {
             console.error('Error fetching cart products:', error);
@@ -153,16 +153,23 @@ router.post('/resetPassword', async (req, res) => {
     const { email, password, newpassword, matchpassword } = req.body;
 
     if (!email) {
-        return res.status(400).json({ message: "Email is required" });
+        req.flash('fail', 'Email is required')
+        return res.redirect('/profile')
     }
 
-    if (newpassword && newpassword !== matchpassword) {
-        return res.status(400).json({ message: "New passwords do not match" });
+    if(!password){
+        req.flash('fail', 'Current password is required')
+        return res.redirect('/profile')
+    }
+
+    if (newpassword !== matchpassword) {
+        req.flash('fail', 'New passwords do not match')
+        return res.redirect('/profile')
     }
 
     try {
         //useriig email eer ni haigaad
-        const user = await User.findOne({ email });
+        const user = await userModel.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -171,7 +178,8 @@ router.post('/resetPassword', async (req, res) => {
         if (password) {
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                return res.status(400).json({ message: "Current password is incorrect" });
+                req.flash('fail', 'Current password is incorrect')
+                return res.redirect('/profile')
             }
         }
 
@@ -182,10 +190,10 @@ router.post('/resetPassword', async (req, res) => {
         }
 
         await user.save();
-        res.status(200).json({ message: "Password updated successfully" });
+        req.flash('fail', 'Password updated successfully')
+        return res.redirect('/profile')
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server error" });
     }
 });
 

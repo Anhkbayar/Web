@@ -21,17 +21,18 @@ router.get('/product/:id', async (req, res) => {
 
 router.post('/deleteItem', async (req, res)=>{
     try {
-        const { productId } = req.body; // Extract file ID from the request body
+        const { productId } = req.body;
         console.log(req.body)
         const file = await Filemodel.findByIdAndDelete(productId);
 
         if (!file) {
-            return res.status(404).json({ message: "File not found" });
+            return console.log("File not found");
         }
 
         const deleteFiles = (filePaths, basePath) => {
             filePaths.forEach((fileName) => {
-                const filePath = path.join(basePath, fileName);
+                const filePath = path.join('G:/Semester3/WebProject/public/',basePath, fileName);
+                console.log(filePath)
                 fs.unlink(filePath, (err) => {
                     if (err) {
                         console.error(`Failed to delete file: ${filePath}`, err);
@@ -43,12 +44,8 @@ router.post('/deleteItem', async (req, res)=>{
         };
 
         deleteFiles(file.coverImageNames, coverImageBasePath);
-
         deleteFiles(file.stlFileNames, stlFileBasePath);
-
         deleteFiles(file.chassisImageNames, chassisImageBasePath);
-
-        await models.findByIdAndDelete(productId);
 
         res.status(200).json({ message: "File deleted" });
 
@@ -60,10 +57,6 @@ router.post('/deleteItem', async (req, res)=>{
 
 router.get('/successfull', async (req, res) => {
     res.render('successfull.ejs')
-})
-
-router.get('/item', async (req, res) => {
-    res.render('filefull.ejs')
 })
 
 router.get('/cars', async (req, res) => {

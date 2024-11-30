@@ -17,13 +17,13 @@
         <div class="sidebar-container">
             <%- include('../partials/userSidebar.ejs') %>
         </div>
-        
+
         <!-- Main Content -->
         <div class="content">
             <h2>Account Details</h2>
             <form class="account-form" action="/resetPassword" method="post">
                 <label for="email">Email Address*</label><br>
-                <input type="email" id="email" value="<%= email %>">
+                <input type="email" name="email" id="email" value="<%= email %>">
 
                 <h3>Change Password</h3>
 
@@ -40,8 +40,12 @@
                     <input type="checkbox" id="subscribe">
                     <label for="subscribe">Subscribe to product updates</label>
                 </div>
-
-                <input type="submit" value="Save changes" class="save-button">
+                <% if (messages.fail) { %>
+                    <p class="error-message">
+                        <%= messages.fail %>
+                    </p>
+                    <% } %>
+                        <input type="submit" value="Save changes" class="save-button">
             </form>
         </div>
     </div>
