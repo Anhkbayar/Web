@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userModel = require('../models/usermodel')
+const fileModel = require('../models/filemodel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
@@ -74,7 +75,7 @@ router.post('/register', async (req, res) => {
 router.get('/profile', (req, res) => {
     const email = req.user.email
     const password = req.user.password
-    res.render('user/accountDetails.ejs', {email, password})
+    res.render('user/accountDetails.ejs', { email, password })
 })
 
 router.get('/downloads', (req, res) => {
@@ -82,11 +83,55 @@ router.get('/downloads', (req, res) => {
     res.render('user/userDownloads.ejs')
 })
 
-router.get('/cart', async (req, res) => {
-    res.render('cart.ejs')
-})
+router.post('/add-to-cart', (req, res) => {
+    const { productId } = req.body;
+    console.log(productId)
+    if (!productId) {
+        return res.status(400).json({ message: 'Product ID is required.' });
+    }
 
-router.get('/resetPassword', async (req, res)=>{
+    // Initialize cart in session if not exists
+    if (!req.session.cart) {
+        req.session.cart = [];
+    }
+
+    // Check if product already exists
+    const existingItem = req.session.cart.find(item => item.productId === productId);
+    if (existingItem) {
+        return res.status(400).json({ message: 'This item is already in your cart.' });
+    }
+
+    // Add product to cart
+    req.session.cart.push({ productId });
+
+    console.log(req.session.cart)
+
+    res.json({ message: 'Item added to cart successfully.', cart: req.session.cart });
+});
+
+router.get('/cart', async (req, res) => {
+    const cart = req.session.cart;
+    if (cart && cart.length > 0) {
+        // Extract product IDs from the cart
+        const productIds = cart.map(item => item.productId);
+
+        try {
+            // Query the database for all products in the cart
+            const products = await fileModel.find({ '_id': { $in: productIds } });
+
+            // Render the cart view with the fetched products
+            res.render('cart.ejs', { products });
+        } catch (error) {
+            console.error('Error fetching cart products:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    } else {
+        res.render('cart.ejs', { products: [] }); // Empty cart
+    }
+});
+
+
+router.get('/resetPassword', async (req, res) => {
     const { email, password, newpassword, matchpassword } = req.body;
 
     if (!email) {
@@ -98,7 +143,7 @@ router.get('/resetPassword', async (req, res)=>{
     }
 
     try {
-      //useriig email eer ni haigaad
+        //useriig email eer ni haigaad
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: "User not found" });

@@ -16,15 +16,43 @@
     <div class="cart-page">
         <div class="cart-container">
             <ul class="cart-items">
-                <%- include('partials/cartshort') %>
+                <% products.forEach((product)=> { %>
+                    <li class="cart-item">
+                        <div class="image">
+                            <img src="/uploads/ModelCovers/<%= product.coverImageNames[0] %>" alt="Hotrod model">
+                        </div>
+                        <div class="info">
+                            <h2>
+                                <%= product.title %>
+                            </h2>
+                            <p>✅ Stl files</p>
+                            <p>✅ Instructions</p>
+                            <hr>
+                            <p class="price">
+                                <%= product.price? "$" +product.price : "free" %>
+                            </p>
+
+                        </div>
+                        <div class="remove">
+                            <button>&times;</button>
+                        </div>
+                    </li>
+                    <% }); %>
             </ul>
             <div class="checkout-summary">
                 <div class="summary">
-                    <p>Subtotal <span>$85.98</span></p>
-                    <p>Taxes <span>$0.00</span></p>
-                    <hr>
-                    <p><strong>Total</strong> <span><strong>$85.98</strong></span></p>
-                    <button class="checkout-btn">Checkout</button>
+                    <% let sum=0 %>
+                        <p>Subtotal <span>
+                                <%= products.forEach((product)=>{sum += product.price}) %>
+                                    $<%= sum.toFixed(2) %>
+                            </span></p>
+                        <p>Taxes <span>$<% let tax=(sum*0.01).toFixed(2)%>
+                                    <%= tax %></span></p>
+                        <hr>
+                        <p><strong>Total</strong> <span><strong>
+                                    $<%= parseFloat(tax) + parseFloat(sum) %>
+                                </strong></span></p>
+                        <button class="checkout-btn">Checkout</button>
                 </div>
             </div>
         </div>
@@ -33,5 +61,8 @@
         <%- include('partials/footer') %>
     </div>
 </body>
+<script>
+
+</script>
 
 </html>
