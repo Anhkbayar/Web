@@ -13,7 +13,7 @@ router.use(authenticateToken)
 router.use(setUsername)
 
 router.get('/login', (req, res) => {
-    res.render('login/login.ejs', {message: null});
+    res.render('login/login.ejs', { message: null });
 });
 
 router.post('/login', async (req, res) => {
@@ -54,8 +54,36 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    const { username, email, pass } = req.body;
+    const { username, email, pass, terms} = req.body;
     try {
+        const existingUser = await userModel.findOne({ email })
+
+        if (!username) {
+            req.flash('error', 'Username is required')
+            return res.redirect('/register')
+        }
+        if (!email) {
+            req.flash('error', 'Email is required')
+            return res.redirect('/register')
+        }
+        if (!pass) {
+            req.flash('error', 'Enter your password')
+            return res.redirect('/register')
+        }
+        if (existingUser) {
+            req.flash('error', 'User already exists')
+            return res.redirect('/register')
+        }
+        const passwordRegex = /^.{8,}$/;
+        if (!passwordRegex.test(pass)) {
+            req.flash('error', 'Password must be at least 8 characters long');
+            return res.redirect('/register');
+        }
+        if(!terms){
+            req.flash('error', 'Please accept our terms and conditions')
+            return res.redirect('/register')
+        }
+
         const salt = await bcrypt.genSalt(10)
         const password = await bcrypt.hash(pass, salt);
         const user = await userModel.create({
@@ -157,7 +185,7 @@ router.post('/resetPassword', async (req, res) => {
         return res.redirect('/profile')
     }
 
-    if(!password){
+    if (!password) {
         req.flash('fail', 'Current password is required')
         return res.redirect('/profile')
     }

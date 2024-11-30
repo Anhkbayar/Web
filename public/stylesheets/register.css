@@ -79,3 +79,6 @@ h1 {
 .register input[type="submit"]:hover {
     background-color: #27788a;
 }
+.error-message{
+    color: red;
+}
