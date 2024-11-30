@@ -5,18 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All cars</title>
+    <link rel="stylesheet" href="stylesheets/accessoryStyle.css">
 </head>
 
 <body>
     <div class="header">
         <%- include('partials/header.ejs')  %>
     </div>
-    <div class="cars-container">
-        <p>cars</p>
-    </div>
-    <div class="footer">
-        <%- include('partials/footer.ejs') %>
-    </div>
+    <main>
+        <h1 id="type">All accessories</h1>
+        <div class="cars-list">
+            <ul>
+                <% for (let i=0; i < allFiles.length; i++) { %>
+                    <% if(allFiles[i].type==='Car' ){ %>
+                        <%- include('partials/fileshort', { file: allFiles[i] }) %>
+                            <% if(i==4){ break} %>
+                                <%} } %>
+            </ul>
+        </div>
+    </main>
 </body>
 
 </html>

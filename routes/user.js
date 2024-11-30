@@ -13,7 +13,7 @@ router.use(authenticateToken)
 router.use(setUsername)
 
 router.get('/login', (req, res) => {
-    res.render('login/login.ejs');
+    res.render('login/login.ejs', {message: null});
 });
 
 router.post('/login', async (req, res) => {
@@ -21,31 +21,30 @@ router.post('/login', async (req, res) => {
     try {
         const user = await userModel.findOne({ email });
         if (!user) {
-            return res.status(404).json({
-                message: "User not found",
-            });
+            req.flash('error', 'Email or password is incorrect');
+            return res.redirect('/login');
         }
 
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
-            return res.status(401).json({ // Use status 401 for "Unauthorized"
-                message: "Wrong password",
-            });
+            req.flash('error', 'Email or password is incorrect');
+            return res.redirect('/login');
         }
+
 
         // Authentication successful
         const token = jwt.sign(
             { id: user._id, name: user.username, email: user.email },
-            process.env.MY_SECRET,
-            { expiresIn: "1h" })
+            process.env.MY_SECRET
+        )
 
         res.cookie("token", token)
         return res.redirect('/')
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({
-            message: "Server error",
+        return res.status(500).render('login', {
+            message: "Email or password is incorrect",
         });
     }
 });
@@ -135,17 +134,17 @@ router.post('/remove', async (req, res) => {
     // console.log("Body:", req.body);
 
     const { removeID } = req.body;
-    const carts = req.session.cart || []; 
+    const carts = req.session.cart || [];
     // console.log("Current cart:", carts);
 
     const updatedCart = carts.filter(item => item.productId !== removeID);
 
     if (updatedCart.length !== carts.length) {
-        req.session.cart = updatedCart 
+        req.session.cart = updatedCart
         console.log("Updated cart:", updatedCart)
         return res.status(200).json({ message: "Item removed successfully" })
     }
-    
+
     console.log("Item not found in cart");
     return res.status(404).json({ message: "Item not found in the cart" });
 });

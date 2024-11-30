@@ -46,6 +46,7 @@
         body: JSON.stringify({ productId: fileId }),
     });
     console.log(productId)
+    window.location.reload()
 } catch (error) {
     console.error("Error deleting item:", error);
 }

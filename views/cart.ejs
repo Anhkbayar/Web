@@ -73,6 +73,7 @@
                 },
                 body: JSON.stringify({ removeID: fileId }),
             });
+            window.location.reload()
         } catch (error) {
             console.error("Error adding to cart:", error);
             alert("An error occurred. Please try again.");

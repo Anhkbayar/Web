@@ -62,23 +62,16 @@ router.get('/successfull', async (req, res) => {
     res.render('successfull.ejs')
 })
 
-// router.get('/checkout', async (req, res) => {
-//     const cart = req.session.cart;
-//     console.log(cart)
-//     if (cart && cart.length > 0) {
-//         const products = await Filemodel.findById(req.params.id);
-//         res.render('cartinfo.ejs', {products})
-//     }
-// })
-
 router.get('/item', async (req, res) => {
     res.render('filefull.ejs')
 })
 
-router.get('/cars', (req, res) => {
-    res.render('cars.ejs')
+router.get('/cars', async (req, res) => {
+    const allFiles = await Filemodel.find();
+    res.render('cars.ejs', {allFiles, error: null})
 })
-router.get('/accessories', (req, res) => {
-    res.render('accessories.ejs')
+router.get('/accessories', async (req, res) => {
+    const allFiles = await Filemodel.find();
+    res.render('accessories.ejs', {allFiles, error:null})
 })
 module.exports = router;
