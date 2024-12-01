@@ -88,6 +88,9 @@
             },
             body: JSON.stringify({status: 1})
         });
+        if (response.redirected) {
+            window.location.href = response.url;
+          }
     }
 </script>
 

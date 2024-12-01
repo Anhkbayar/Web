@@ -231,37 +231,63 @@ router.get('/logout', (req, res) => {
 
 router.post('/checkout', async (req, res) => {
     const cart = req.session.cart;
-    if (cart && cart.length > 0) {
-        // cartaas product idnuudiig salgaj avna
-        const productIds = cart.map(item => item.productId);
-        console.log("product ID nuud", productIds)
-        try {
-            // cart dotor baigaa buh idnuudiig db ees haina
+    const token = req.cookies.token;
+    if (!token) {
+        console.log('no token')
+        return res.redirect('/login');
+    }
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.MY_SECRET);
+        console.log('Logged in user:', decoded);
+
+        if (cart && cart.length > 0) {
+            // Extract product IDs from the cart
+            const productIds = cart.map(item => item.productId);
+            console.log('Product IDs:', productIds);
+
+            // Fetch all products in the cart
             const products = await fileModel.find({ '_id': { $in: productIds } });
-            let sum = 0
-            let count = 0
+            let sum = 0;
+            let count = 0;
+
+            // Calculate sum and count of products
             products.forEach(product => {
-                count++
-                sum += product.price
+                count++;
+                sum += product.price;
             });
-            console.log('sum ba count', sum, count)
-            
-            if (count == 0) {
-                req.flash('nothing', 'No items here')
-                return res.redirect('/cart')
+            console.log('Sum and Count:', sum, count);
+
+            if (count === 0) {
+                console.log("count 0")
+                req.flash('nothing', 'No items here');
+                return res.redirect('/cart');
             }
 
-            if (sum === 0) {
-                return res.redirect('/profile')
-            }else {
-                return res.redirect('/sorry')
+            if (sum === 0 && count !== 0) {
+                console.log("free and counted")
+                await userModel.updateOne(
+                    { _id: decoded.id },
+                    { $addToSet: { owned: { $each: productIds } } }
+                );
+                return res.redirect('/downloads');
+            } 
+            
+            if(sum && count !== 0) {
+                console.log("price")
+                return res.redirect('/sorry');
             }
-        } catch (error) {
-            console.error('Error fetching cart products:', error);
-            res.status(500).send('Internal Server Error');
+        } else {
+            console.log("Cart is empty");
+            res.redirect('/cart');
         }
-    } else {
-        res.render('cart.ejs', { products: [] });
+    } catch (error) {
+        if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+            req.flash('error', 'Session expired. Please log in again.');
+            return res.redirect('/login');
+        }
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
     }
 
 })
