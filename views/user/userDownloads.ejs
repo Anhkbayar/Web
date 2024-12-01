@@ -28,12 +28,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Dakar Truck</td>
-                        <td>20</td>
-                        <td>Download</td>
-                    </tr>
-                
+                    <% if (owns.owned.length > 0) { %>
+                        <% owns.owned.forEach(file => { %>
+                            <tr>
+                                <td><%= file.title %></td>
+                                <td>20</td>
+                                <td>
+                                    <a href="/download/<%= file._id %>">Download</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="3">No products available for download.</td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>

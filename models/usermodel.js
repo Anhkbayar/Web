@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const models = require('./filemodel');
 
 const userSchema = mongoose.Schema({
     username: {
@@ -14,9 +15,9 @@ const userSchema = mongoose.Schema({
       required: [true, "Enter your password"],
     },
     owned: {
-      type:[mongoose.Schema.Types.ObjectId]
+      type:[mongoose.Schema.Types.ObjectId],
+      ref: models
     },
-    
   })
   
   const users = mongoose.model("users", userSchema);

@@ -105,9 +105,30 @@ router.get('/profile', (req, res) => {
     res.render('user/accountDetails.ejs', { email, password })
 })
 
-router.get('/downloads', (req, res) => {
-    res.render('user/userDownloads.ejs')
+router.get('/downloads',async (req,res)=>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, process.env.MY_SECRET);
+
+    const owns = await userModel.findOne({_id: decoded.id }).populate('owned')
+    
+    res.render('user/userDownloads.ejs',{owns})
 })
+
+router.get('/download/:id', async (req, res) => {
+    try {
+        const fileId = req.params.id;
+        const file = await fileModel.findById(fileId);
+
+        if (!file) {
+            return res.status(404).send('File not found.');
+        }
+
+        res.download(file.path, file.name);
+    } catch (error) {
+        console.error('Error during file download:', error);
+        res.status(500).send('An error occurred while downloading the file.');
+    }
+});
 
 router.post('/add-to-cart', (req, res) => {
     const { productId } = req.body;
