@@ -54,7 +54,7 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    const { username, email, pass, terms} = req.body;
+    const { username, email, pass, terms } = req.body;
     try {
         const existingUser = await userModel.findOne({ email })
 
@@ -79,7 +79,7 @@ router.post('/register', async (req, res) => {
             req.flash('error', 'Password must be at least 8 characters long');
             return res.redirect('/register');
         }
-        if(!terms){
+        if (!terms) {
             req.flash('error', 'Please accept our terms and conditions')
             return res.redirect('/register')
         }
@@ -106,7 +106,6 @@ router.get('/profile', (req, res) => {
 })
 
 router.get('/downloads', (req, res) => {
-
     res.render('user/userDownloads.ejs')
 })
 
@@ -117,7 +116,7 @@ router.post('/add-to-cart', (req, res) => {
         return res.status(400).json({ message: 'Product ID is required.' });
     }
 
-    // hooson baival hoosniig uusgene
+    // baihgui baival hoosniig uusgene
     if (!req.session.cart) {
         req.session.cart = [];
     }
@@ -230,5 +229,41 @@ router.get('/logout', (req, res) => {
     return res.redirect('/');
 });
 
+router.post('/checkout', async (req, res) => {
+    const cart = req.session.cart;
+    if (cart && cart.length > 0) {
+        // cartaas product idnuudiig salgaj avna
+        const productIds = cart.map(item => item.productId);
+        console.log("product ID nuud", productIds)
+        try {
+            // cart dotor baigaa buh idnuudiig db ees haina
+            const products = await fileModel.find({ '_id': { $in: productIds } });
+            let sum = 0
+            let count = 0
+            products.forEach(product => {
+                count++
+                sum += product.price
+            });
+            console.log('sum ba count', sum, count)
+            
+            if (count == 0) {
+                req.flash('nothing', 'No items here')
+                return res.redirect('/cart')
+            }
+
+            if (sum === 0) {
+                return res.redirect('/profile')
+            }else {
+                return res.redirect('/sorry')
+            }
+        } catch (error) {
+            console.error('Error fetching cart products:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    } else {
+        res.render('cart.ejs', { products: [] });
+    }
+
+})
 
 module.exports = router

@@ -22,11 +22,14 @@ h1 {
     display: flex;
     justify-content: space-between;
     margin: 40px 140px;
+    position: relative; /* Enables positioning for child elements */
 }
 
 .cart-container {
     display: flex;
-    justify-content: space-between;
+    flex: 3; /* Takes most of the width for the cart items */
+    flex-direction: column;
+    margin-right: 20px; /* Adds space between the items and summary */
 }
 /* cartnii itemnuud */
 .cart-items {
@@ -95,6 +98,11 @@ h1 {
 
 /* Checkout heseg */
 .checkout-summary {
+    display: flex;
+    justify-content: center;
+    position: sticky; 
+    top: 20px;
+    align-self: flex-end; 
     width: 400px;
     height: 425px;
     background-color: white;
@@ -104,6 +112,7 @@ h1 {
 
 .summary {
     display: flex;
+    flex: 1 0 100%;
     flex-direction: column;
     padding: 20px;
     gap: 10px;
@@ -122,9 +131,14 @@ h1 {
     border-top: 1px solid #ddd;
 }
 
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
 .checkout-btn {
-    margin: 10px 55px;
-    padding: 10px;
+    margin-top: 55px;
+    padding: 15px 25px;
     border: none;
     background-color: #3b93a7;
     color: white;

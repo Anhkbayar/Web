@@ -41,7 +41,7 @@
   <div class="cars-list">
     <ul>
       <% for (let i=0; i < allFiles.length; i++) { %>
-        <% if(allFiles[i].type === 'Car'){ %>
+        <% if(allFiles[i].type === 'car'){ %>
         <%- include('partials/fileshort', { file: allFiles[i] }) %>
           <% if(i==4){ break} %>
             <% }} %>

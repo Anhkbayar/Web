@@ -21,5 +21,9 @@ router.get('/terms', (req, res) => {
     res.render('terms.ejs')
 })
 
+router.get('/sorry', (req,res)=>{
+    res.render('sorry.ejs')
+})
+
 
 module.exports = router

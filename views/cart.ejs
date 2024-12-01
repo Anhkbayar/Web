@@ -53,8 +53,9 @@
                         <p><strong>Total</strong> <span><strong>
                                     $<%= parseFloat(tax) + parseFloat(sum) %>
                                 </strong></span></p>
-                        <a href="/cart"><button class="checkout-btn">Checkout</button></a>
-
+                        <div class="button-container">
+                            <button onclick="checkout()" class="checkout-btn">Checkout</button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -78,6 +79,15 @@
             console.error("Error adding to cart:", error);
             alert("An error occurred. Please try again.");
         }
+    }
+    async function checkout(){
+        const response = await fetch('/checkout',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({status: 1})
+        });
     }
 </script>
 
