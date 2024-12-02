@@ -15,48 +15,51 @@
     <h1>Your Cart</h1>
     <div class="cart-page">
         <div class="cart-container">
-            <ul class="cart-items">
-                <% products.forEach((product)=> { %>
-                    <li class="cart-item">
-                        <div class="image">
-                            <img src="/uploads/ModelCovers/<%= product.coverImageNames[0] %>" alt="Hotrod model">
-                        </div>
-                        <div class="info">
-                            <h2>
-                                <%= product.title %>
-                            </h2>
-                            <p>✅ Stl files</p>
-                            <p>✅ Instructions</p>
-                            <hr>
-                            <p class="price">
-                                <%= product.price? "$" +product.price : "free" %>
-                            </p>
-
-                        </div>
-                        <div class="remove">
-                            <button onclick="removeItem('<%= product.id %>')"><img src="/Icons/delete.svg"
-                                    alt="Delete"></button>
-                        </div>
-                    </li>
-                    <% }); %>
-            </ul>
-            <div class="checkout-summary">
-                <div class="summary">
-                    <% let sum=0 %>
-                        <p>Subtotal <span>
-                                <%= products.forEach((product)=>{sum += product.price}) %>
-                                    $<%= sum.toFixed(2) %>
-                            </span></p>
-                        <p>Taxes <span>$<% let tax=(sum*0.01).toFixed(2)%>
-                                    <%= tax %></span></p>
+            <% if (products.length> 0) { %>
+                <ul class="cart-items">
+                    <% products.forEach((product)=> { %>
+                        <li class="cart-item">
+                            <div class="image">
+                                <img src="/uploads/ModelCovers/<%= product.coverImageNames[0] %>" alt="Hotrod model">
+                            </div>
+                            <div class="info">
+                                <h2>
+                                    <%= product.title %>
+                                </h2>
+                                <p>✅ Stl files</p>
+                                <p>✅ Instructions</p>
+                                <hr>
+                                <p class="price">
+                                    <%= product.price ? "$" + product.price : "free" %>
+                                </p>
+                            </div>
+                            <div class="remove">
+                                <button onclick="removeItem('<%= product.id %>')">
+                                    <img src="/Icons/delete.svg" alt="Delete">
+                                </button>
+                            </div>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } else { %>
+                    <p class="empty-cart-message">Your cart is currently empty.</p>
+                    <% } %>
+        </div>
+        <div class="checkout-summary">
+            <div class="summary">
+                <% let sum=0 %>
+                    <% products.forEach((product)=> { sum += product.price; }); %>
+                        <p>Subtotal <span>$<%= sum.toFixed(2) %></span></p>
+                        <p>Taxes <span>$<%= (sum * 0.01).toFixed(2) %></span></p>
                         <hr>
-                        <p><strong>Total</strong> <span><strong>
-                                    $<%= parseFloat(tax) + parseFloat(sum) %>
-                                </strong></span></p>
+                        <p><strong>Total</strong> <span><strong>$<%= (sum + sum * 0.01).toFixed(2) %></strong></span>
+                        </p>
                         <div class="button-container">
-                            <button onclick="checkout()" class="checkout-btn">Checkout</button>
+                            <button onclick="checkout()" class="checkout-btn" <%=products.length===0 ? 'disabled' : ''
+                                %>>
+                                Checkout
+                            </button>
                         </div>
-                </div>
             </div>
         </div>
     </div>
@@ -80,17 +83,17 @@
             alert("An error occurred. Please try again.");
         }
     }
-    async function checkout(){
-        const response = await fetch('/checkout',{
+    async function checkout() {
+        const response = await fetch('/checkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({status: 1})
+            body: JSON.stringify({ status: 1 })
         });
         if (response.redirected) {
             window.location.href = response.url;
-          }
+        }
     }
 </script>
 

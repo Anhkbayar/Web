@@ -16,11 +16,19 @@
     </div>
     <div class="container-content">
         <div class="images">
-            <% file.coverImageNames.forEach(function(coverImageName) { %>
+            <% file.coverImageNames.forEach(function(coverImageName, index) { %>
                 <div class="image">
-                    <img src="../uploads/ModelCovers/<%= coverImageName %>" alt="<%= file.title %>" class="file-image">
+                    <img src="../uploads/ModelCovers/<%= coverImageName %>" alt="<%= file.title %>" class="file-image"
+                        onclick="openModal('<%= coverImageName%>')">
                 </div>
                 <% }); %>
+        </div>
+
+        <!-- Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" class="modal-content" alt="">
+            <div id="modalCaption" class="caption"></div>
         </div>
         <div class="infos">
             <div class="title">
@@ -86,10 +94,10 @@
     </div>
     <div class="xray-cont">
         <div class="xray">
-            <% file.chassisImageNames.forEach(function(chassisImageName) { %>
-                <div class="image">
+            <% file.chassisImageNames.forEach(function (chassisImageName, index) { %>
+                <div class="image-container">
                     <img src="../uploads/ChassisImages/<%= chassisImageName %>" alt="<%= file.title %>"
-                        class="file-image">
+                        class="file-images <%= index === 0 ? 'first-image' : 'second-image' %>">
                 </div>
                 <% }); %>
         </div>
@@ -117,11 +125,30 @@
                 },
                 body: JSON.stringify({ productId: fileId }),
             });
-            
+
         } catch (error) {
             console.error("Error adding to cart:", error);
             alert("An error occurred. Please try again.");
         }
     }
+
+    let currentIndex = 0;
+    const images = JSON.stringify('<%= file.coverImageNames %>');
+    console.log(images)
+
+    function openModal(imageName) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+    
+        modal.style.display = "block";
+        modalImage.src = `../uploads/ModelCovers/${imageName}`; 
+        modalCaption.textContent = "Image Preview";
+    }
+    
+    function closeModal() {
+        document.getElementById('imageModal').style.display = "none";
+    }
 </script>
+
 </html>

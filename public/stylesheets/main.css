@@ -53,14 +53,15 @@
     transition: ease 0.3;
 }
 
-.top-wrapper.shop:hover {
+.shop:hover {
     background-color: #1e6373;
 }
 
 .top-wrapper .text-pos {
     position: absolute;
-    top: 100px;
+    top: 200px;
     left: 80px;
+    z-index: 2;
 }
 
 .cars-text {
@@ -89,12 +90,14 @@
 }
 
 .content__container {
-    font-size: 5em;
+    font-size: 6em;
     font-weight: 600;
 }
 
-.content__container li {
-    background: -webkit-linear-gradient(#3b93a7, #17FF74);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.content_text {
+    text-shadow:
+        4px 4px 0 #FFD400,
+        8px 8px 0 #FF0000,
+        12px 12px 0 #3b93a7;
+
 }

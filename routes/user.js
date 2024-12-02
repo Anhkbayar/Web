@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const authenticateToken = require('../middleware/authenticateToken')
 const setUsername = require('../middleware/setUsername')
+const path = require('path')
 
 router.use(cookieParser());
 router.use(authenticateToken)
@@ -120,10 +121,16 @@ router.get('/download/:id', async (req, res) => {
         const file = await fileModel.findById(fileId);
 
         if (!file) {
-            return res.status(404).send('File not found.');
+            return res.status(404).send('File not found.')
         }
-
-        res.download(file.path, file.name);
+        const stlFileName = file.stlFileNames[0]
+        const filePath = path.join(__dirname, '..', 'public', fileModel.stlFileBasePath, stlFileName)
+        res.download(filePath, stlFileName, (err) => {
+            if (err) {
+                console.error('Error during file download:', err);
+                res.status(500).send('An error occurred while downloading the file.');
+            }
+        });
     } catch (error) {
         console.error('Error during file download:', error);
         res.status(500).send('An error occurred while downloading the file.');
