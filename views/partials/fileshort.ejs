@@ -88,8 +88,16 @@
     .texts {
         color: black;
     }
+    .redirect{
+        color: black;
+    }
+    .redirect:hover{
+        border-radius: 16px;
+        box-shadow: 4px 4px 16px 1px rgba(0, 0, 0, 0.5);
+    }
+
 </style>
-<a href="/product/<%= file.id %>">
+<a href="/product/<%= file.id %>" class="redirect">
     <li>
         <div class="images">
             <img src="../uploads/ModelCovers/<%= file.coverImageNames[0] %>" alt="<%= file.title %>" class="file-image">

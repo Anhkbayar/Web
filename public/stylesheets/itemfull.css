@@ -30,10 +30,7 @@
 .title .stats .downcount,
 .reviewcount {
     display: flex;
-}
-
-.title .reviewcount {
-    padding: 10px 0px;
+    margin: 5px 0;
 }
 
 hr {
@@ -81,7 +78,8 @@ th {
     padding: 10px 5px;
 }
 
-.buy .cartadd {
+.buy .addtocart {
+    border: 0;
     font-size: 1.5em;
     font-weight: 600;
     color: white;
@@ -89,10 +87,9 @@ th {
     padding: 15px 70px;
     border-radius: 16px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
-    transition: ease 0.5s;
 }
 
-.buy .cartadd:hover {
+.buy .addtocart:hover {
     background-color: #2f8295;
 }
 

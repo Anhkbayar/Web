@@ -51,6 +51,10 @@
         border-radius: 12px;
     }
 
+    nav ul li a.Cart:hover {
+        background-color: #2f8295;
+    }
+
     /* login hesgiin style */
     nav ul li a.Login {
         padding: 10px 40px;
@@ -58,7 +62,9 @@
         color: #F4F6F6;
         background-color: #3b93a7;
     }
-
+    nav ul li a.Login:hover{
+        background-color: #2f8295;
+    }
     nav ul li a.username {
         padding: 10px 40px;
         border-radius: 15px;
@@ -67,7 +73,7 @@
     }
 
     nav ul li a.username:hover {
-        background-color: #1e6373;
+        background-color: #2f8295;
     }
 </style>
 <nav>
@@ -75,13 +81,12 @@
     <ul id="header">
         <li><a href="/cars">Cars</a></li>
         <li><a href="/accessories">Accessories</a></li>
+        <li><a class="Cart" href="/cart"><img src="/Icons/Cart.svg" alt="Cart"></a></li>
         <% if (username) { %>
-            <li><a class="Cart" href="/cart"><img src="/Icons/Cart.svg" alt="Cart"></a></li>
-            <li class="username"><a href="/profile" class="username">
+            <li class="name"><a href="/profile" class="username">
                     <%= username %>
                 </a></li>
             <% } else { %>
-                <li><a class="Cart" href="/cart"><img src="/Icons/Cart.svg" alt="Cart"></a></li>
                 <li><a class="Login" href="/login" class="login">Login</a></li>
                 <% } %>
     </ul>
