@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap');
 
 * {
-    margin: 0;
     padding: 0;
-    font-family: 'Commissioner', sans-serif;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Commissioner';
 }
 
 body {
@@ -22,15 +25,19 @@ h1 {
     display: flex;
     justify-content: space-between;
     margin: 40px 140px;
-    position: relative; /* Enables positioning for child elements */
+    position: relative;
+    /* Enables positioning for child elements */
 }
 
 .cart-container {
     display: flex;
-    flex: 3; /* Takes most of the width for the cart items */
+    flex: 3;
+    /* Takes most of the width for the cart items */
     flex-direction: column;
-    margin-right: 20px; /* Adds space between the items and summary */
+    margin-right: 20px;
+    /* Adds space between the items and summary */
 }
+
 /* cartnii itemnuud */
 .cart-items {
     flex: 3;
@@ -100,9 +107,9 @@ h1 {
 .checkout-summary {
     display: flex;
     justify-content: center;
-    position: sticky; 
+    position: sticky;
     top: 20px;
-    align-self: flex-end; 
+    align-self: flex-end;
     width: 400px;
     height: 425px;
     background-color: white;
@@ -131,7 +138,7 @@ h1 {
     border-top: 1px solid #ddd;
 }
 
-.button-container{
+.button-container {
     display: flex;
     justify-content: center;
 }
